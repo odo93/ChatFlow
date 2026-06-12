@@ -1,0 +1,2028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatFlow — Project Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B2A4A;--teal:#1A7A6E;--teal2:#2A9D8F;--gold:#E9C46A;
+  --bg:#F0F4F8;--white:#fff;--text:#1E293B;--muted:#64748B;
+  --border:#E2E8F0;--success:#10B981;--danger:#EF4444;--warn:#F59E0B;
+  --font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+  --r:10px;--r-lg:14px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;min-height:100vh}
+
+/* ── HEADER ── */
+.site-header{background:var(--navy);padding:0 32px;display:flex;align-items:center;height:60px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.08)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:32px;height:32px;background:var(--teal);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px}
+.logo-text{font-size:16px;font-weight:600;color:#fff;letter-spacing:-.01em}
+.logo-badge{font-size:10px;background:var(--gold);color:#412402;padding:2px 7px;border-radius:20px;font-weight:600}
+.header-nav{display:flex;align-items:center;gap:4px;margin-left:32px}
+.hnav-btn{background:none;border:none;color:rgba(255,255,255,.6);font-size:13px;font-family:var(--font);padding:7px 12px;cursor:pointer;border-radius:7px;transition:all .15s}
+.hnav-btn:hover,.hnav-btn.active{background:rgba(255,255,255,.1);color:#fff}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.share-btn{background:var(--teal);color:#fff;border:none;font-family:var(--font);font-size:12px;font-weight:500;padding:7px 14px;border-radius:7px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .15s}
+.share-btn:hover{opacity:.9}
+.version-tag{font-size:11px;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15);padding:3px 8px;border-radius:20px}
+
+/* ── HERO ── */
+.hero{background:var(--navy);padding:48px 32px 40px;border-bottom:1px solid rgba(255,255,255,.08)}
+.hero-inner{max-width:900px;margin:0 auto}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal2);margin-bottom:12px}
+.hero-title{font-size:36px;font-weight:300;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:12px}
+.hero-title strong{font-weight:600;color:var(--gold)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:560px;line-height:1.7;margin-bottom:24px}
+.hero-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.meta-chip{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:5px 10px;border-radius:20px}
+.meta-chip i{font-size:13px}
+.hero-actions{display:flex;gap:10px;margin-top:24px}
+.btn-hero-primary{background:var(--teal);color:#fff;border:none;font-family:var(--font);font-size:13px;font-weight:500;padding:10px 20px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:opacity .15s;text-decoration:none}
+.btn-hero-primary:hover{opacity:.9}
+.btn-hero-ghost{background:none;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);font-family:var(--font);font-size:13px;padding:10px 20px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .15s;text-decoration:none}
+.btn-hero-ghost:hover{border-color:rgba(255,255,255,.4);color:#fff}
+
+/* ── MAIN LAYOUT ── */
+.main-wrap{max-width:1100px;margin:0 auto;padding:32px 32px 64px}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── TABS ── */
+.tab-bar{display:flex;gap:2px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:4px;margin-bottom:24px}
+.tab-btn{flex:1;border:none;background:none;font-family:var(--font);font-size:13px;font-weight:500;padding:9px 16px;border-radius:8px;cursor:pointer;color:var(--muted);transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px}
+.tab-btn.active{background:var(--navy);color:#fff}
+.tab-btn:hover:not(.active){background:var(--bg);color:var(--text)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+
+/* ── CARDS ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px}
+.card+.card{margin-top:12px}
+.card-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.card-sub{font-size:12px;color:var(--muted);line-height:1.6}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+
+/* ── BADGE ── */
+.badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px}
+.b-teal{background:#D4F0EB;color:#0F5045}
+.b-navy{background:#D0D8E8;color:#1B2A4A}
+.b-gold{background:#FDF0CD;color:#7A5A00}
+.b-red{background:#FEE2E2;color:#991B1B}
+.b-green{background:#D1FAE5;color:#065F46}
+.b-gray{background:#F1EFE8;color:#444441}
+.b-amber{background:#FEF3C7;color:#92400E}
+
+/* ── STEP ── */
+.step-row{display:flex;gap:12px;margin-bottom:10px}
+.step-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.step-label{font-size:14px;font-weight:500}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-top:2px}
+.step-vline{width:2px;height:12px;background:var(--border);margin-left:12px;margin-bottom:4px}
+
+/* ── CALLOUT ── */
+.callout{border-left:3px solid var(--teal);background:#F0FDF9;border-radius:0 var(--r) var(--r) 0;padding:12px 14px;font-size:13px;color:var(--muted);line-height:1.6}
+.callout.warn{border-left-color:var(--warn);background:#FFFBEB}
+.callout.danger{border-left-color:var(--danger);background:#FEF2F2}
+.callout strong{color:var(--text)}
+
+/* ── CODE ── */
+.code-block{background:#1E293B;border-radius:var(--r);padding:16px;font-family:var(--mono);font-size:12px;color:#94A3B8;overflow-x:auto;line-height:1.7}
+.code-block .k{color:#7DD3FC}.code-block .s{color:#86EFAC}.code-block .c{color:#64748B}
+.inline-code{font-family:var(--mono);font-size:11px;background:var(--bg);border:1px solid var(--border);padding:1px 5px;border-radius:4px;color:var(--muted)}
+
+/* ── DATA TABLE ── */
+.dtable{width:100%;border-collapse:collapse;font-size:12px}
+.dtable th{background:var(--bg);padding:8px 12px;text-align:left;font-weight:600;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);letter-spacing:.03em;text-transform:uppercase}
+.dtable td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.dtable tr:last-child td{border-bottom:none}
+
+/* ── PROGRESS ── */
+.pbar{height:5px;background:var(--bg);border-radius:99px;overflow:hidden}
+.pbar-fill{height:100%;background:var(--teal);border-radius:99px}
+
+/* ── APP FRAME ── */
+.app-frame{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:var(--white);box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.app-frame-bar{background:var(--bg);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:8px}
+.frame-dot{width:10px;height:10px;border-radius:50%}
+
+/* ══════════════════════════════
+   PROTOTYPE APP STYLES
+══════════════════════════════ */
+.app{display:flex;height:680px;overflow:hidden;background:#F0F4F8}
+.sidebar{width:200px;background:#1B2A4A;display:flex;flex-direction:column;flex-shrink:0}
+.sidebar-logo{padding:14px 12px 10px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:8px}
+.s-logo-icon{width:28px;height:28px;background:#1A7A6E;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px}
+.s-logo-text{font-size:14px;font-weight:600;color:#fff}
+.s-logo-badge{font-size:9px;background:#E9C46A;color:#412402;padding:1px 5px;border-radius:10px;font-weight:600;margin-left:auto}
+.nav-items{flex:1;padding:8px 6px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.55);font-size:12px;margin-bottom:2px;transition:all .15s;position:relative;font-family:var(--font)}
+.nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-item.active{background:rgba(26,122,110,.3);color:#fff;border-left:3px solid #1A7A6E;padding-left:7px}
+.nav-icon{font-size:15px;width:16px;text-align:center}
+.nav-badge{margin-left:auto;background:#EF4444;color:#fff;font-size:9px;padding:1px 5px;border-radius:10px;font-weight:600}
+.nav-bottom{padding:8px 6px;border-top:1px solid rgba(255,255,255,.08)}
+.user-row{display:flex;align-items:center;gap:8px;padding:7px 10px}
+.user-av{width:26px;height:26px;border-radius:50%;background:#1A7A6E;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600}
+.user-name{font-size:11px;color:rgba(255,255,255,.8);font-weight:500}
+.user-plan{font-size:9px;color:#E9C46A}
+.p-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.topbar{height:48px;background:#fff;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;padding:0 18px;gap:10px;flex-shrink:0}
+.bc{flex:1;font-size:13px;font-weight:600;color:#1E293B}
+.topbar-r{display:flex;align-items:center;gap:6px}
+.s-dot-row{display:flex;align-items:center;gap:4px;font-size:10px;color:#64748B;background:#F8FAFC;border:1px solid #E2E8F0;padding:3px 7px;border-radius:20px}
+.s-dot{width:6px;height:6px;border-radius:50%;background:#10B981}
+.bell-btn{background:none;border:1px solid #E2E8F0;border-radius:7px;padding:5px 7px;cursor:pointer;color:#64748B;font-size:14px;line-height:1;position:relative}
+.bell-bdg{position:absolute;top:-4px;right:-4px;background:#EF4444;color:#fff;font-size:8px;width:13px;height:13px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
+.av-t{width:26px;height:26px;border-radius:50%;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#0C447C}
+.p-content{flex:1;overflow-y:auto;background:#F0F4F8;padding:16px}
+.p-page{display:none}.p-page.active{display:block}
+
+/* stat cards */
+.s-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.s-card{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:12px 14px}
+.s-lbl{font-size:10px;color:#64748B;margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.s-val{font-size:20px;font-weight:600;color:#1E293B;margin-bottom:3px}
+.s-delta{font-size:10px}
+.d-up{color:#059669}.d-dn{color:#DC2626}
+
+/* mini card */
+.mc{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:14px;margin-bottom:10px}
+.mc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.mc-title{font-size:12px;font-weight:600;color:#1E293B}
+.p-grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.p-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+
+/* charts */
+.bar-ch{display:flex;align-items:flex-end;gap:3px;height:72px;padding-top:6px}
+.p-bar{flex:1;border-radius:2px 2px 0 0;background:#1A7A6E;opacity:.75;min-width:0;cursor:pointer;transition:opacity .15s}
+.p-bar:hover{opacity:1}
+.p-bar-labels{display:flex;gap:3px;margin-top:3px}
+.p-bar-lbl{flex:1;text-align:center;font-size:8px;color:#94A3B8;min-width:0}
+.donut{width:52px;height:52px;border-radius:50%;background:conic-gradient(#1A7A6E 0% 68%,#E9C46A 68% 100%);flex-shrink:0}
+.dleg{display:flex;align-items:center;gap:5px;font-size:10px;margin-bottom:3px}
+.dleg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* conv list */
+.c-list{list-style:none}
+.c-item{display:flex;align-items:center;gap:8px;padding:8px 9px;border-radius:7px;cursor:pointer;transition:background .1s;margin-bottom:1px}
+.c-item:hover,.c-item.sel{background:#F0F4F8}
+.c-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;color:#fff}
+.c-body{flex:1;min-width:0}
+.c-name{font-size:11px;font-weight:600;color:#1E293B}
+.c-prev{font-size:10px;color:#94A3B8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c-time{font-size:9px;color:#94A3B8}
+.c-dot{width:6px;height:6px;border-radius:50%;margin:2px 0 0}
+
+/* chat panel */
+.chat-wrap{display:flex;gap:10px;height:470px}
+.cl-panel{width:200px;flex-shrink:0;background:#fff;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.cl-srch{padding:8px;border-bottom:1px solid #E2E8F0}
+.cl-srch input{width:100%;font-size:11px;padding:5px 8px;border:1px solid #E2E8F0;border-radius:6px;background:#F8FAFC;color:#1E293B;font-family:var(--font)}
+.cl-ftabs{display:flex;border-bottom:1px solid #E2E8F0}
+.cft{flex:1;font-size:9px;padding:5px;text-align:center;cursor:pointer;color:#94A3B8;border:none;background:none;border-bottom:2px solid transparent;transition:all .15s;font-family:var(--font)}
+.cft.active{color:#1A7A6E;border-bottom-color:#1A7A6E}
+.cl-body{flex:1;overflow-y:auto;padding:6px}
+.chat-p{flex:1;background:#fff;border:1px solid #E2E8F0;border-radius:10px;display:flex;flex-direction:column;overflow:hidden}
+.ch-head{padding:9px 12px;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;gap:8px}
+.ch-av{width:28px;height:28px;border-radius:50%;background:#1A7A6E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+.ch-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:7px;background:#F0F4F8}
+.msg{max-width:75%;display:flex;flex-direction:column}
+.msg.bot{align-self:flex-end}
+.msg.cust{align-self:flex-start}
+.msg-b{padding:7px 10px;border-radius:10px;font-size:11px;line-height:1.5}
+.msg.cust .msg-b{background:#fff;border:1px solid #E2E8F0;color:#1E293B;border-radius:3px 10px 10px 10px}
+.msg.bot .msg-b{background:#1A7A6E;color:#fff;border-radius:10px 3px 10px 10px}
+.msg-meta{font-size:9px;color:#94A3B8;margin-top:2px;padding:0 2px}
+.ch-footer{padding:8px;border-top:1px solid #E2E8F0;display:flex;gap:6px;background:#fff}
+.ch-inp{flex:1;font-size:11px;padding:7px 9px;border:1px solid #E2E8F0;border-radius:7px;background:#F8FAFC;color:#1E293B;font-family:var(--font)}
+.ch-send{background:#1A7A6E;color:#fff;border:none;border-radius:7px;padding:7px 10px;cursor:pointer;font-size:12px}
+.bot-banner{background:#D4F0EB;border:1px solid #9FE1CB;border-radius:5px;margin:0 8px 6px;padding:5px 8px;font-size:10px;color:#0F5045;display:flex;align-items:center;gap:5px;justify-content:space-between}
+.esc-banner{background:#FEE2E2;border:1px solid #FCA5A5;border-radius:5px;margin:0 8px 6px;padding:5px 8px;font-size:10px;color:#991B1B}
+.takeover-mini{background:none;border:1px solid #9FE1CB;border-radius:5px;padding:2px 7px;font-size:10px;color:#0F5045;cursor:pointer;font-family:var(--font)}
+
+/* bot builder */
+.bt-tabs{display:flex;gap:3px;margin-bottom:12px;border-bottom:1px solid #E2E8F0;padding-bottom:0}
+.bt{font-size:11px;font-weight:500;padding:6px 10px;border:none;background:none;cursor:pointer;color:#64748B;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;font-family:var(--font)}
+.bt.active{color:#1A7A6E;border-bottom-color:#1A7A6E}
+.bp{display:none}.bp.active{display:block}
+.f-lbl{font-size:10px;font-weight:600;color:#64748B;margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:.04em}
+.f-inp{width:100%;font-size:11px;padding:6px 9px;border:1px solid #E2E8F0;border-radius:7px;background:#F8FAFC;color:#1E293B;font-family:var(--font)}
+.f-ta{width:100%;font-size:11px;padding:6px 9px;border:1px solid #E2E8F0;border-radius:7px;background:#F8FAFC;color:#1E293B;resize:vertical;min-height:60px;font-family:var(--font)}
+.f-row{margin-bottom:10px}
+.chip{display:inline-block;font-size:10px;background:#F0F4F8;border:1px solid #E2E8F0;padding:2px 7px;border-radius:20px;margin:2px;color:#64748B}
+.chip.teal{background:#D4F0EB;color:#0F5045;border-color:#9FE1CB}
+
+/* templates */
+.tpl-c{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:12px;margin-bottom:8px}
+.tpl-nm{font-size:12px;font-weight:600}
+.tpl-pr{font-size:10px;color:#64748B;line-height:1.5;margin:6px 0;font-family:var(--mono)}
+.tpl-ft{display:flex;align-items:center;gap:5px}
+.icon-b{background:none;border:1px solid #E2E8F0;border-radius:6px;padding:3px 7px;cursor:pointer;color:#64748B;font-size:12px;transition:all .15s;font-family:var(--font)}
+.icon-b:hover{background:#F0F4F8}
+
+/* analytics */
+.a-bar-ch{height:80px;display:flex;align-items:flex-end;gap:2px;padding-top:6px}
+.a-bar{flex:1;border-radius:2px 2px 0 0;min-width:0;background:#1A7A6E;opacity:.7;cursor:pointer;transition:opacity .15s}
+.a-bar:hover{opacity:1}
+
+/* settings */
+.st-tabs{display:flex;gap:3px;margin-bottom:12px;border-bottom:1px solid #E2E8F0}
+.st{font-size:11px;font-weight:500;padding:6px 10px;border:none;background:none;cursor:pointer;color:#64748B;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:var(--font)}
+.st.active{color:#1A7A6E;border-bottom-color:#1A7A6E}
+.sp{display:none}.sp.active{display:block}
+.api-ok{background:#D1FAE5;color:#065F46;font-size:11px;padding:7px 10px;border-radius:7px;display:none;margin-top:8px}
+.api-err{background:#FEE2E2;color:#991B1B;font-size:11px;padding:7px 10px;border-radius:7px;display:none;margin-top:8px}
+
+/* onboarding */
+.onb-w{max-width:380px;margin:30px auto 0}
+.onb-steps{display:flex;align-items:center;gap:5px;margin-bottom:20px;justify-content:center}
+.os{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1px solid #E2E8F0;font-family:var(--font)}
+.os.done{background:#1A7A6E;color:#fff;border-color:#1A7A6E}
+.os.cur{background:#fff;color:#1A7A6E;border:2px solid #1A7A6E}
+.os.todo{background:#F0F4F8;color:#94A3B8}
+.onb-line{flex:1;height:1px;background:#E2E8F0}
+.onb-card{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:22px}
+.onb-icon{width:44px;height:44px;border-radius:10px;background:#D4F0EB;display:flex;align-items:center;justify-content:center;font-size:22px;color:#0F5045;margin-bottom:12px}
+.onb-title{font-size:15px;font-weight:600;margin-bottom:5px}
+.onb-desc{font-size:12px;color:#64748B;margin-bottom:16px;line-height:1.6}
+
+/* buttons */
+.btn-p{background:#1A7A6E;color:#fff;border:none;font-family:var(--font);font-size:11px;font-weight:500;padding:8px 14px;border-radius:7px;cursor:pointer;transition:opacity .15s;display:inline-flex;align-items:center;gap:5px}
+.btn-p:hover{opacity:.9}
+.btn-s{background:none;border:1px solid #E2E8F0;font-family:var(--font);font-size:11px;padding:8px 14px;border-radius:7px;cursor:pointer;color:#64748B}
+
+/* test chat */
+.t-chat{background:#F0F4F8;border-radius:8px;padding:8px;height:150px;overflow-y:auto;margin-bottom:6px;display:flex;flex-direction:column;gap:5px}
+.t-results table{width:100%;border-collapse:collapse;font-size:10px}
+.t-results th{padding:4px 6px;text-align:left;color:#64748B;border-bottom:1px solid #E2E8F0;font-weight:600;font-size:9px;text-transform:uppercase}
+.t-results td{padding:4px 6px;border-bottom:1px solid #F0F4F8}
+
+/* notif drop */
+.n-drop{position:absolute;top:50px;right:90px;width:260px;background:#fff;border:1px solid #E2E8F0;border-radius:10px;z-index:50;display:none;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.n-drop.open{display:block}
+.n-item{padding:9px 12px;border-bottom:1px solid #F0F4F8;cursor:pointer;font-family:var(--font)}
+.n-item:hover{background:#F8FAFC}
+.n-title{font-size:11px;font-weight:500;color:#1E293B;margin-bottom:2px}
+.n-time{font-size:10px;color:#94A3B8}
+.n-dot-r{display:inline-block;width:6px;height:6px;border-radius:50%;background:#EF4444;margin-right:5px;vertical-align:2px}
+.n-dot-y{display:inline-block;width:6px;height:6px;border-radius:50%;background:#F59E0B;margin-right:5px;vertical-align:2px}
+
+/* modal */
+.modal-bg{display:none;position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:30;align-items:center;justify-content:center;border-radius:var(--r-lg)}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:20px;width:320px;border:1px solid #E2E8F0}
+.modal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.modal-title{font-size:13px;font-weight:600}
+.modal-x{background:none;border:none;cursor:pointer;color:#94A3B8;font-size:16px;line-height:1}
+
+/* toast */
+.toast{position:absolute;bottom:14px;right:14px;background:#1B2A4A;color:#fff;padding:8px 14px;border-radius:8px;font-size:11px;font-weight:500;display:none;z-index:60;font-family:var(--font)}
+
+/* ── BLUEPRINT SECTION ── */
+.bp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.screen-pill{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--white);border:1px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all .15s}
+.screen-pill:hover{border-color:var(--teal);background:#F0FDF9}
+.screen-pill.sel{border-color:var(--teal);border-width:2px}
+.screen-pill-num{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.screen-pill-name{font-size:13px;font-weight:500}
+.screen-pill-desc{font-size:11px;color:var(--muted)}
+.detail-box{background:var(--bg);border-radius:var(--r-lg);padding:16px;margin-top:12px;border:1px solid var(--border)}
+
+/* ── CHECKLIST ── */
+.check-item{display:flex;align-items:flex-start;gap:9px;padding:7px 10px;cursor:pointer;border-radius:8px;transition:background .1s}
+.check-item:hover{background:var(--bg)}
+.check-item input[type=checkbox]{width:15px;height:15px;flex-shrink:0;margin-top:1px;accent-color:var(--teal);cursor:pointer}
+.check-text{font-size:13px;line-height:1.5}
+.check-text.done{text-decoration:line-through;color:var(--muted)}
+.check-group-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin:16px 0 6px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .grid-2,.grid-3,.grid-4,.s-grid,.p-grid2,.p-grid3{grid-template-columns:1fr}
+  .chat-wrap{flex-direction:column;height:auto}
+  .cl-panel{width:100%;height:200px}
+  .tab-btn span{display:none}
+  .hero-title{font-size:26px}
+  .main-wrap{padding:20px 16px 48px}
+  .site-header{padding:0 16px}
+  .hero{padding:32px 16px 28px}
+}
+
+/* ── USER FLOW ── */
+.flow-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid var(--border);background:var(--white);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;color:var(--muted);transition:all .15s;font-family:var(--font)}
+.flow-pill:hover{border-color:var(--teal);color:var(--teal)}
+.flow-pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.flow-pill i{font-size:14px}
+
+.uf-wrap{display:grid;grid-template-columns:280px 1fr;gap:20px}
+.uf-steps-panel{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.uf-steps-header{background:var(--navy);padding:14px 16px;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.uf-step-item{display:flex;align-items:flex-start;gap:0;cursor:pointer;transition:background .1s;border-bottom:1px solid var(--border)}
+.uf-step-item:last-child{border-bottom:none}
+.uf-step-item:hover{background:var(--bg)}
+.uf-step-item.active{background:#F0FDF9}
+.uf-step-left{width:48px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding-top:16px}
+.uf-step-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.uf-step-line{width:2px;flex:1;min-height:16px;margin-top:4px}
+.uf-step-body{flex:1;padding:12px 14px 12px 0}
+.uf-step-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.uf-step-sub{font-size:11px;color:var(--muted);line-height:1.5}
+.uf-step-badge{display:inline-block;font-size:9px;font-weight:600;padding:1px 6px;border-radius:20px;margin-top:5px}
+
+.uf-detail-panel{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.uf-detail-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px}
+.uf-detail-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.uf-detail-title{font-size:15px;font-weight:600;margin-bottom:3px}
+.uf-detail-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.uf-detail-body{padding:16px 20px}
+
+.uf-decision{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:10px}
+.uf-decision-q{font-size:12px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.uf-branch-row{display:flex;gap:8px;flex-wrap:wrap}
+.uf-branch{flex:1;min-width:120px;padding:8px 10px;border-radius:8px;font-size:11px;border:1px solid var(--border)}
+.uf-branch.yes{background:#F0FDF9;border-color:#9FE1CB;color:#0F5045}
+.uf-branch.no{background:#FEF2F2;border-color:#FCA5A5;color:#991B1B}
+.uf-branch.maybe{background:#FFFBEB;border-color:#FCD34D;color:#92400E}
+.uf-branch-label{font-weight:700;font-size:10px;margin-bottom:3px}
+
+.uf-screen-ref{display:inline-flex;align-items:center;gap:4px;background:var(--navy);color:#fff;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin:2px;cursor:pointer;transition:opacity .15s;font-family:var(--font);border:none}
+.uf-screen-ref:hover{opacity:.8}
+
+.uf-data-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px}
+.uf-data-row:last-child{border-bottom:none}
+.uf-data-icon{font-size:14px;width:20px;text-align:center;color:var(--teal)}
+.uf-data-key{font-family:var(--mono);font-size:10px;background:var(--bg);border:1px solid var(--border);padding:1px 5px;border-radius:4px;color:var(--muted);flex-shrink:0}
+
+.uf-api-flow{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.uf-api-step{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:var(--bg);font-size:11px}
+.uf-api-step-num{width:20px;height:20px;border-radius:50%;background:var(--teal);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.uf-api-step-text{flex:1}
+.uf-api-arrow{color:var(--muted);font-size:12px;text-align:center;padding:2px 0}
+
+.uf-nav-row{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-top:1px solid var(--border);background:var(--bg)}
+.uf-nav-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--border);background:var(--white);border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;color:var(--text);transition:all .15s;font-family:var(--font)}
+.uf-nav-btn:hover{border-color:var(--teal);color:var(--teal)}
+.uf-nav-btn:disabled{opacity:.3;cursor:default}
+.uf-nav-btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.uf-nav-btn.primary:hover{opacity:.9;color:#fff}
+
+.uf-progress{display:flex;align-items:center;gap:6px}
+.uf-prog-dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:background .2s}
+.uf-prog-dot.active{background:var(--teal)}
+.uf-prog-dot.done{background:var(--navy)}
+
+@media(max-width:700px){.uf-wrap{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a class="logo" href="#">
+    <div class="logo-icon"><i class="ti ti-message-chatbot" aria-hidden="true"></i></div>
+    <span class="logo-text">ChatFlow</span>
+    <span class="logo-badge">Project Hub</span>
+  </a>
+  <nav class="header-nav" aria-label="Page sections">
+    <button class="hnav-btn active" onclick="showSection('prototype',this)"><i class="ti ti-device-desktop" aria-hidden="true"></i> Prototype</button>
+    <button class="hnav-btn" onclick="showSection('blueprint',this)"><i class="ti ti-sitemap" aria-hidden="true"></i> Blueprint</button>
+    <button class="hnav-btn" onclick="showSection('userflow',this)"><i class="ti ti-timeline" aria-hidden="true"></i> User flow</button>
+    <button class="hnav-btn" onclick="showSection('data',this)"><i class="ti ti-database" aria-hidden="true"></i> Data schema</button>
+    <button class="hnav-btn" onclick="showSection('checklist',this)"><i class="ti ti-checklist" aria-hidden="true"></i> Test checklist</button>
+  </nav>
+  <div class="header-right">
+    <span class="version-tag">v2.0 · 2026</span>
+    <button class="share-btn" onclick="copyLink()"><i class="ti ti-link" aria-hidden="true"></i> Copy link</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Startup idea evaluation — week 3</div>
+    <h1 class="hero-title">ChatFlow <strong>Project Hub</strong></h1>
+    <p class="hero-sub">AI-powered auto reply chatbot for small business owners on WhatsApp &amp; Instagram. Full clickable prototype + architecture blueprint for team review before Replit build.</p>
+    <div class="hero-meta">
+      <div class="meta-chip"><i class="ti ti-users" aria-hidden="true"></i> Dina · Mahmoud · Samer · Moatasem</div>
+      <div class="meta-chip"><i class="ti ti-brain" aria-hidden="true"></i> Claude API · React · Tailwind</div>
+      <div class="meta-chip"><i class="ti ti-device-mobile" aria-hidden="true"></i> WhatsApp &amp; Instagram</div>
+      <div class="meta-chip"><i class="ti ti-map-pin" aria-hidden="true"></i> MENA market · EGP pricing</div>
+    </div>
+    <div class="hero-actions">
+      <a href="#prototype-section" class="btn-hero-primary"><i class="ti ti-player-play" aria-hidden="true"></i> Explore prototype</a>
+      <a href="#blueprint-section" class="btn-hero-ghost"><i class="ti ti-file-description" aria-hidden="true"></i> View blueprint</a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- TAB BAR -->
+  <div class="tab-bar" role="tablist">
+    <button class="tab-btn active" onclick="showSection('prototype',this)" role="tab" id="tab-prototype">
+      <i class="ti ti-device-desktop" aria-hidden="true"></i> <span>Clickable prototype</span>
+    </button>
+    <button class="tab-btn" onclick="showSection('blueprint',this)" role="tab" id="tab-blueprint">
+      <i class="ti ti-sitemap" aria-hidden="true"></i> <span>Architecture</span>
+    </button>
+    <button class="tab-btn" onclick="showSection('userflow',this)" role="tab" id="tab-userflow">
+      <i class="ti ti-timeline" aria-hidden="true"></i> <span>User flow</span>
+    </button>
+    <button class="tab-btn" onclick="showSection('data',this)" role="tab" id="tab-data">
+      <i class="ti ti-database" aria-hidden="true"></i> <span>Data schema</span>
+    </button>
+    <button class="tab-btn" onclick="showSection('checklist',this)" role="tab" id="tab-checklist">
+      <i class="ti ti-checklist" aria-hidden="true"></i> <span>Test checklist</span>
+    </button>
+  </div>
+
+  <!-- ═══════════ SECTION: PROTOTYPE ═══════════ -->
+  <div class="tab-pane active" id="sec-prototype" id="prototype-section">
+    <div class="section-label"><i class="ti ti-device-desktop" aria-hidden="true"></i> Full clickable prototype — 7 screens</div>
+    <div class="callout" style="margin-bottom:16px">
+      <strong>How to use:</strong> Click sidebar items to navigate screens. Every button, form, and chat interaction works. Use the Conversations screen to send real messages and see the bot reply. Open Setup wizard to walk through onboarding.
+    </div>
+
+    <!-- APP FRAME -->
+    <div class="app-frame" id="prototype-section">
+      <div class="app-frame-bar">
+        <div class="frame-dot" style="background:#EF4444"></div>
+        <div class="frame-dot" style="background:#F59E0B"></div>
+        <div class="frame-dot" style="background:#10B981"></div>
+        <span style="font-size:11px;color:#94A3B8;margin-left:8px">chatflow.app — prototype</span>
+      </div>
+
+      <!-- ═══ THE APP ═══ -->
+      <div class="app" style="position:relative">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+          <div class="sidebar-logo">
+            <div class="s-logo-icon"><i class="ti ti-message-chatbot" aria-hidden="true"></i></div>
+            <div class="s-logo-text">ChatFlow</div>
+            <div class="s-logo-badge">Pro</div>
+          </div>
+          <nav class="nav-items">
+            <div class="nav-item active" onclick="gp('dashboard')" id="pnav-dashboard"><i class="ti ti-layout-dashboard nav-icon" aria-hidden="true"></i> Dashboard</div>
+            <div class="nav-item" onclick="gp('onboarding')" id="pnav-onboarding"><i class="ti ti-sparkles nav-icon" aria-hidden="true"></i> Setup wizard</div>
+            <div class="nav-item" onclick="gp('bots')" id="pnav-bots"><i class="ti ti-robot nav-icon" aria-hidden="true"></i> Bot builder</div>
+            <div class="nav-item" onclick="gp('conversations')" id="pnav-conversations"><i class="ti ti-messages nav-icon" aria-hidden="true"></i> Conversations <span class="nav-badge">3</span></div>
+            <div class="nav-item" onclick="gp('analytics')" id="pnav-analytics"><i class="ti ti-chart-bar nav-icon" aria-hidden="true"></i> Analytics</div>
+            <div class="nav-item" onclick="gp('templates')" id="pnav-templates"><i class="ti ti-file-text nav-icon" aria-hidden="true"></i> Templates</div>
+            <div class="nav-item" onclick="gp('settings')" id="pnav-settings"><i class="ti ti-settings nav-icon" aria-hidden="true"></i> Settings</div>
+          </nav>
+          <div class="nav-bottom">
+            <div class="user-row">
+              <div class="user-av">MG</div>
+              <div><div class="user-name">Mahmoud Gomaa</div><div class="user-plan">Pro plan</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN -->
+        <div class="p-main">
+          <div class="topbar">
+            <div class="bc" id="pbc">Dashboard</div>
+            <div class="topbar-r">
+              <div class="s-dot-row"><span class="s-dot"></span>WA <span class="s-dot" style="margin-left:4px"></span>IG</div>
+              <button class="bell-btn" onclick="toggleND()" aria-label="Notifications"><i class="ti ti-bell" aria-hidden="true"></i><span class="bell-bdg">2</span></button>
+              <div class="av-t">MG</div>
+            </div>
+          </div>
+
+          <!-- NOTIF -->
+          <div class="n-drop" id="nd">
+            <div style="padding:8px 12px;border-bottom:1px solid #F0F4F8;font-size:11px;font-weight:600">Notifications</div>
+            <div class="n-item" onclick="gp('conversations');closeND()"><div class="n-title"><span class="n-dot-r"></span>Ahmed Fathy needs human support</div><div class="n-time">22 min ago · order cancellation</div></div>
+            <div class="n-item" onclick="gp('settings');closeND()"><div class="n-title"><span class="n-dot-y"></span>WhatsApp API usage at 68%</div><div class="n-time">1 hour ago · monthly limit approaching</div></div>
+          </div>
+
+          <div class="p-content">
+
+            <!-- DASHBOARD -->
+            <div class="p-page active" id="pp-dashboard">
+              <div class="s-grid">
+                <div class="s-card"><div class="s-lbl">Messages</div><div class="s-val">1,284</div><div class="s-delta d-up"><i class="ti ti-trending-up" style="font-size:10px"></i> +18%</div></div>
+                <div class="s-card"><div class="s-lbl">Response rate</div><div class="s-val">97.3%</div><div class="s-delta d-up"><i class="ti ti-trending-up" style="font-size:10px"></i> +4.1%</div></div>
+                <div class="s-card"><div class="s-lbl">Sales saved</div><div class="s-val">EGP 12,400</div><div class="s-delta"><span class="badge b-gold">This month</span></div></div>
+                <div class="s-card"><div class="s-lbl">Active bots</div><div class="s-val">3</div><div class="s-delta"><span class="badge b-teal">Live</span></div></div>
+              </div>
+              <div class="p-grid2">
+                <div class="mc"><div class="mc-head"><span class="mc-title">Messages — last 7 days</span></div><div class="bar-ch" id="dash-ch"></div><div class="p-bar-labels" id="dash-lbl"></div></div>
+                <div class="mc">
+                  <div class="mc-head"><span class="mc-title">Platform split</span></div>
+                  <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+                    <div class="donut"></div>
+                    <div><div class="dleg"><div class="dleg-dot" style="background:#1A7A6E"></div><span style="font-size:10px;color:#64748B">WhatsApp 68%</span></div><div class="dleg"><div class="dleg-dot" style="background:#E9C46A"></div><span style="font-size:10px;color:#64748B">Instagram 32%</span></div></div>
+                  </div>
+                  <div class="mc-title" style="margin-bottom:6px">Top triggers</div>
+                  <div id="d-triggers"></div>
+                </div>
+              </div>
+              <div class="mc"><div class="mc-head"><span class="mc-title">Recent conversations</span><button class="icon-b" onclick="gp('conversations')" style="font-size:10px">View all <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div><ul class="c-list" id="d-convs"></ul></div>
+              <div class="mc">
+                <div class="mc-head"><span class="mc-title"><i class="ti ti-flask" style="font-size:12px;margin-right:4px;color:#1A7A6E" aria-hidden="true"></i>Quick test</span><span class="badge b-teal">Demo bot</span></div>
+                <div id="q-chat" style="background:#F0F4F8;border-radius:7px;padding:8px;min-height:44px;margin-bottom:6px;font-size:11px;color:#94A3B8">Type below to test the AI bot...</div>
+                <div style="display:flex;gap:6px"><input class="ch-inp" id="q-inp" placeholder="e.g. What is the price?" onkeydown="if(event.key==='Enter')qSend()"><button class="ch-send" onclick="qSend()"><i class="ti ti-send" aria-hidden="true"></i></button></div>
+              </div>
+            </div>
+
+            <!-- ONBOARDING -->
+            <div class="p-page" id="pp-onboarding">
+              <div class="onb-w"><div class="onb-steps" id="o-steps"></div><div id="o-body"></div></div>
+            </div>
+
+            <!-- BOTS -->
+            <div class="p-page" id="pp-bots">
+              <div class="p-grid3" id="bot-cards" style="margin-bottom:12px"></div>
+              <div class="mc" id="bot-edit">
+                <div class="mc-head"><span class="mc-title"><i class="ti ti-edit" style="font-size:12px;margin-right:4px;color:#1A7A6E" aria-hidden="true"></i>Editing: WhatsApp main bot</span><span class="badge b-green">Live</span></div>
+                <div class="bt-tabs">
+                  <button class="bt active" onclick="sBT(0)">Basic setup</button>
+                  <button class="bt" onclick="sBT(1)">Knowledge base</button>
+                  <button class="bt" onclick="sBT(2)">Templates</button>
+                  <button class="bt" onclick="sBT(3)">Test bot</button>
+                </div>
+                <div class="bp active" id="btp-0">
+                  <div class="p-grid2">
+                    <div><div class="f-row"><label class="f-lbl">Bot name</label><input class="f-inp" value="WhatsApp Main Bot"></div><div class="f-row"><label class="f-lbl">Business name</label><input class="f-inp" value="Nour Fashion"></div><div class="f-row"><label class="f-lbl">Type</label><select class="f-inp"><option>Fashion</option><option>Food</option><option>Cosmetics</option></select></div></div>
+                    <div><div class="f-row"><label class="f-lbl">Platform</label><label style="display:flex;align-items:center;gap:5px;font-size:11px;margin-bottom:5px"><input type="checkbox" checked> WhatsApp</label><label style="display:flex;align-items:center;gap:5px;font-size:11px"><input type="checkbox"> Instagram</label></div><div class="f-row" style="margin-top:8px"><label class="f-lbl">Status</label><label style="display:flex;align-items:center;gap:7px;cursor:pointer"><div style="width:32px;height:18px;background:#1A7A6E;border-radius:9px;position:relative"><div style="position:absolute;top:2px;left:16px;width:14px;height:14px;background:#fff;border-radius:50%"></div></div><span style="font-size:11px;color:#64748B">Live</span></label></div></div>
+                  </div>
+                  <button class="btn-p" onclick="pToast('Bot saved')">Save changes</button>
+                </div>
+                <div class="bp" id="btp-1">
+                  <div class="p-grid2">
+                    <div><div class="f-row"><label class="f-lbl">Products</label><textarea class="f-ta">Women's dresses, abayas, casual wear. Sizes S, M, L, XL.</textarea></div><div class="f-row"><label class="f-lbl">Price range</label><input class="f-inp" value="EGP 250 – 750"></div></div>
+                    <div><div class="f-row"><label class="f-lbl">Delivery info</label><textarea class="f-ta">2-3 days Cairo, 4-5 outside. Free above EGP 500.</textarea></div><div class="f-row"><label class="f-lbl">Payment</label><label style="display:flex;align-items:center;gap:5px;font-size:11px;margin-bottom:4px"><input type="checkbox" checked> Cash on delivery</label><label style="display:flex;align-items:center;gap:5px;font-size:11px;margin-bottom:4px"><input type="checkbox" checked> Vodafone Cash</label><label style="display:flex;align-items:center;gap:5px;font-size:11px"><input type="checkbox" checked> InstaPay</label></div></div>
+                  </div>
+                  <button class="btn-p" onclick="pToast('Knowledge base saved')">Save</button>
+                </div>
+                <div class="bp" id="btp-2">
+                  <div style="font-size:11px;color:#64748B;margin-bottom:8px">Templates injected into this bot's AI system prompt:</div>
+                  <div id="btp2-list"></div>
+                  <button class="btn-s" onclick="gp('templates')" style="font-size:10px;margin-top:6px"><i class="ti ti-plus" aria-hidden="true"></i> Manage templates</button>
+                </div>
+                <div class="bp" id="btp-3">
+                  <div class="p-grid2">
+                    <div>
+                      <div style="font-size:11px;font-weight:600;margin-bottom:6px;color:#64748B">Live chat test</div>
+                      <div class="t-chat" id="t-chat"></div>
+                      <div style="display:flex;gap:5px"><input class="ch-inp" id="t-inp" placeholder="Type to test..." style="font-size:11px" onkeydown="if(event.key==='Enter')tSend()"><button class="ch-send" onclick="tSend()" style="padding:6px 9px;font-size:11px"><i class="ti ti-send" aria-hidden="true"></i></button></div>
+                    </div>
+                    <div>
+                      <div style="font-size:11px;font-weight:600;margin-bottom:6px;color:#64748B">Auto test suite</div>
+                      <button class="btn-p" onclick="runTests()" style="width:100%;margin-bottom:8px;font-size:11px;justify-content:center"><i class="ti ti-player-play" aria-hidden="true" style="margin-right:3px"></i>Run 5 scenarios</button>
+                      <div class="t-results" id="t-results"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CONVERSATIONS -->
+            <div class="p-page" id="pp-conversations">
+              <div class="chat-wrap">
+                <div class="cl-panel">
+                  <div class="cl-srch"><input placeholder="Search..."></div>
+                  <div class="cl-ftabs">
+                    <button class="cft active" onclick="fConv('all',this)">All</button>
+                    <button class="cft" onclick="fConv('pending',this)">Pending</button>
+                    <button class="cft" onclick="fConv('escalated',this)">Escalated</button>
+                  </div>
+                  <div class="cl-body"><ul class="c-list" id="cv-list"></ul></div>
+                </div>
+                <div class="chat-p">
+                  <div class="ch-head">
+                    <div class="ch-av" id="cv-av">SA</div>
+                    <div style="flex:1"><div style="font-size:12px;font-weight:600" id="cv-name">Sara Ahmed</div><div style="font-size:10px;color:#64748B" id="cv-plat">WhatsApp · Bot active</div></div>
+                    <span class="badge b-teal" id="cv-badge">Bot active</span>
+                    <button class="icon-b" onclick="toggleHM()" id="to-btn" style="font-size:10px;margin-left:6px">Take over</button>
+                  </div>
+                  <div class="bot-banner" id="cv-banner">
+                    <span><i class="ti ti-robot" style="font-size:11px;margin-right:3px" aria-hidden="true"></i>Bot is handling</span>
+                    <button class="takeover-mini" onclick="toggleHM()">Human mode</button>
+                  </div>
+                  <div class="ch-msgs" id="cv-msgs"></div>
+                  <div class="ch-footer">
+                    <input class="ch-inp" id="cv-inp" placeholder="Bot is handling — type to override..." onkeydown="if(event.key==='Enter')cvSend()">
+                    <button class="ch-send" onclick="cvSend()"><i class="ti ti-send" aria-hidden="true"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ANALYTICS -->
+            <div class="p-page" id="pp-analytics">
+              <div style="display:flex;gap:6px;margin-bottom:12px">
+                <button class="icon-b" style="font-size:11px;background:#F0F4F8" onclick="setAR(7,this)" id="ar7">Last 7 days</button>
+                <button class="icon-b" style="font-size:11px" onclick="setAR(30,this)" id="ar30">Last 30 days</button>
+                <button class="icon-b" style="font-size:11px" onclick="setAR(0,this)" id="ar0">All time</button>
+              </div>
+              <div class="s-grid">
+                <div class="s-card"><div class="s-lbl">Total messages</div><div class="s-val" id="a-tot">8,432</div><div class="s-delta d-up">+23%</div></div>
+                <div class="s-card"><div class="s-lbl">Resolution rate</div><div class="s-val" id="a-res">94.7%</div><div class="s-delta" style="font-size:10px;color:#64748B">No human needed</div></div>
+                <div class="s-card"><div class="s-lbl">Avg response</div><div class="s-val">0.3s</div><div class="s-delta" style="font-size:10px;color:#64748B">Industry: 4.2h</div></div>
+                <div class="s-card"><div class="s-lbl">Est. API cost</div><div class="s-val" id="a-cost">$0.89</div><div class="s-delta"><span class="badge b-teal">~87k tokens</span></div></div>
+              </div>
+              <div class="p-grid2">
+                <div class="mc"><div class="mc-head"><span class="mc-title">Daily volume</span></div><div class="a-bar-ch" id="a-ch"></div><div class="p-bar-labels" id="a-lbl"></div></div>
+                <div class="mc"><div class="mc-head"><span class="mc-title">Top triggers</span></div><div id="a-trigs"></div></div>
+              </div>
+              <div class="mc"><div class="mc-head"><span class="mc-title">Template performance</span></div><div id="a-perf"></div></div>
+            </div>
+
+            <!-- TEMPLATES -->
+            <div class="p-page" id="pp-templates">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <div style="display:flex;gap:5px">
+                  <button class="icon-b" style="font-size:11px;background:#F0F4F8">All</button>
+                  <button class="icon-b" style="font-size:11px">Sales</button>
+                  <button class="icon-b" style="font-size:11px">Delivery</button>
+                  <button class="icon-b" style="font-size:11px">Returns</button>
+                </div>
+                <button class="btn-p" onclick="openM()" style="font-size:11px"><i class="ti ti-plus" aria-hidden="true"></i> Add template</button>
+              </div>
+              <div id="tpl-list"></div>
+            </div>
+
+            <!-- SETTINGS -->
+            <div class="p-page" id="pp-settings">
+              <div class="mc">
+                <div class="st-tabs">
+                  <button class="st active" onclick="sST(0)">API config</button>
+                  <button class="st" onclick="sST(1)">Model</button>
+                  <button class="st" onclick="sST(2)">Billing</button>
+                  <button class="st" onclick="sST(3)">Data</button>
+                </div>
+                <div class="sp active" id="stp-0">
+                  <div class="f-row"><label class="f-lbl">Anthropic API key</label><input class="f-inp" id="api-k" type="password" placeholder="sk-ant-api03-..."></div>
+                  <div style="display:flex;gap:6px;margin-top:6px">
+                    <button class="btn-p" onclick="testAPI()" style="font-size:11px">Test connection</button>
+                    <button class="btn-s" onclick="pToast('Key saved')" style="font-size:11px">Save key</button>
+                  </div>
+                  <div class="api-ok" id="api-ok"><i class="ti ti-circle-check" aria-hidden="true"></i> Connected — claude-sonnet-4-20250514 · 312ms</div>
+                  <div class="api-err" id="api-err"><i class="ti ti-circle-x" aria-hidden="true"></i> Invalid key. Check and try again.</div>
+                  <div style="margin-top:10px;padding:8px 10px;background:#F8FAFC;border-radius:7px;font-size:10px;color:#64748B"><i class="ti ti-shield-lock" style="font-size:12px;margin-right:3px" aria-hidden="true"></i>Stored in localStorage only — never sent to any server.</div>
+                </div>
+                <div class="sp" id="stp-1">
+                  <div class="f-row"><label class="f-lbl">Max tokens per reply</label><div style="display:flex;align-items:center;gap:8px"><input type="range" min="50" max="500" step="10" value="300" style="flex:1" oninput="document.getElementById('tv').textContent=this.value"><span style="font-size:12px;font-weight:500;min-width:28px" id="tv">300</span></div></div>
+                  <div class="f-row"><label class="f-lbl">Response style</label><div style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;color:#64748B">Precise</span><input type="range" min="1" max="10" step="1" value="5" style="flex:1"><span style="font-size:10px;color:#64748B">Creative</span></div></div>
+                  <div class="f-row"><label class="f-lbl">Language</label><select class="f-inp"><option>Auto-detect</option><option>Always Arabic</option><option>Always English</option></select></div>
+                  <button class="btn-p" onclick="pToast('Model settings saved')" style="font-size:11px">Save</button>
+                </div>
+                <div class="sp" id="stp-2">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div><div style="font-size:14px;font-weight:600">Pro plan</div><div style="font-size:11px;color:#64748B">EGP 349/month · Next: July 5, 2026</div></div><span class="badge b-teal">Active</span></div>
+                  <div id="bill-tbl"></div>
+                  <button class="btn-p" onclick="pToast('Upgrade flow coming in Replit build')" style="font-size:11px;margin-top:10px">Upgrade to Business</button>
+                </div>
+                <div class="sp" id="stp-3">
+                  <div class="f-row"><div style="font-size:12px;font-weight:500;margin-bottom:5px">Storage usage</div><div style="font-size:10px;color:#64748B;margin-bottom:4px">localStorage: 234 KB used</div><div class="pbar" style="width:100%"><div class="pbar-fill" style="width:23%"></div></div></div>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
+                    <button class="btn-p" onclick="pToast('Data exported')" style="font-size:11px"><i class="ti ti-download" aria-hidden="true"></i> Export all</button>
+                    <button class="btn-s" onclick="pToast('Import — select file')" style="font-size:11px"><i class="ti ti-upload" aria-hidden="true"></i> Import backup</button>
+                    <button class="icon-b" onclick="pToast('Conversations cleared')" style="font-size:11px;color:#DC2626"><i class="ti ti-trash" aria-hidden="true"></i> Clear convs</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- MODAL -->
+        <div class="modal-bg" id="modal-bg" onclick="if(event.target===this)closeM()">
+          <div class="modal">
+            <div class="modal-h"><div class="modal-title">Add reply template</div><button class="modal-x" onclick="closeM()"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+            <div class="f-row"><label class="f-lbl">Name</label><input class="f-inp" placeholder="e.g. Price inquiry — Arabic"></div>
+            <div class="f-row"><label class="f-lbl">Category</label><select class="f-inp"><option>Sales</option><option>Delivery</option><option>Returns</option></select></div>
+            <div class="f-row"><label class="f-lbl">Trigger keywords</label><input class="f-inp" placeholder="price, سعر, how much"></div>
+            <div class="f-row"><label class="f-lbl">Reply (English)</label><textarea class="f-ta" placeholder="Hi! The price for {product} is EGP {price}..."></textarea></div>
+            <div class="f-row"><label class="f-lbl">Reply (Arabic)</label><textarea class="f-ta" placeholder="مرحباً! سعر {product} هو {price} جنيه..."></textarea></div>
+            <div style="display:flex;gap:6px;margin-top:4px"><button class="btn-p" onclick="saveTpl()" style="font-size:11px">Save template</button><button class="btn-s" onclick="closeM()" style="font-size:11px">Cancel</button></div>
+          </div>
+        </div>
+
+        <div class="toast" id="p-toast"></div>
+      </div>
+      <!-- END APP -->
+    </div>
+    <!-- END APP FRAME -->
+  </div>
+
+  <!-- ═══════════ SECTION: BLUEPRINT ═══════════ -->
+  <div class="tab-pane" id="sec-blueprint" id="blueprint-section">
+    <div class="section-label"><i class="ti ti-sitemap" aria-hidden="true"></i> Project architecture</div>
+
+    <div class="grid-3" style="margin-bottom:20px">
+      <div class="card"><div style="font-size:20px;margin-bottom:8px;color:var(--teal)"><i class="ti ti-brand-react" aria-hidden="true"></i></div><div class="card-title">Frontend</div><div class="card-sub">React 18 + Vite, Tailwind CSS v3, Recharts, Lucide icons, React Router v6</div></div>
+      <div class="card"><div style="font-size:20px;margin-bottom:8px;color:var(--teal)"><i class="ti ti-brain" aria-hidden="true"></i></div><div class="card-title">AI engine</div><div class="card-sub">Claude API (claude-sonnet-4-20250514). Direct browser fetch. User provides own Anthropic key.</div></div>
+      <div class="card"><div style="font-size:20px;margin-bottom:8px;color:var(--teal)"><i class="ti ti-database" aria-hidden="true"></i></div><div class="card-title">Storage</div><div class="card-sub">100% localStorage. No backend, no DB, no server. Full CRUD via React Context + useReducer.</div></div>
+    </div>
+
+    <div class="section-label"><i class="ti ti-route" aria-hidden="true"></i> Critical path — nothing works without these steps</div>
+    <div class="card" style="margin-bottom:20px">
+      <div class="step-row"><div class="step-num">1</div><div><div class="step-label">API key in Settings</div><div class="step-desc">Get key at console.anthropic.com → Settings → API Config → paste → Test Connection → green ✓</div></div></div>
+      <div class="step-vline"></div>
+      <div class="step-row"><div class="step-num">2</div><div><div class="step-label">Create bot + fill knowledge base</div><div class="step-desc">Business name, products, prices, delivery, payment → these become the Claude system prompt</div></div></div>
+      <div class="step-vline"></div>
+      <div class="step-row"><div class="step-num">3</div><div><div class="step-label">Test in Bot Builder → Test tab</div><div class="step-desc">Type Arabic/English messages → verify real Claude replies → run auto test suite (5 scenarios)</div></div></div>
+      <div class="step-vline"></div>
+      <div class="step-row"><div class="step-num">4</div><div><div class="step-label">Use Conversations screen</div><div class="step-desc">Open chat → bot auto-replies → escalation auto-detected → human can take over anytime</div></div></div>
+    </div>
+
+    <div class="section-label"><i class="ti ti-apps" aria-hidden="true"></i> Screen guide — click to expand</div>
+    <div class="bp-grid" style="margin-bottom:20px">
+      <div class="screen-pill sel" onclick="selScreen(0)" data-idx="0"><div class="screen-pill-num">1</div><div><div class="screen-pill-name">Dashboard</div><div class="screen-pill-desc">KPIs · charts · quick test</div></div></div>
+      <div class="screen-pill" onclick="selScreen(1)" data-idx="1"><div class="screen-pill-num">2</div><div><div class="screen-pill-name">Bot builder</div><div class="screen-pill-desc">Create · edit · test bots</div></div></div>
+      <div class="screen-pill" onclick="selScreen(2)" data-idx="2"><div class="screen-pill-num">3</div><div><div class="screen-pill-name">Conversations</div><div class="screen-pill-desc">Live AI chat inbox</div></div></div>
+      <div class="screen-pill" onclick="selScreen(3)" data-idx="3"><div class="screen-pill-num">4</div><div><div class="screen-pill-name">Analytics</div><div class="screen-pill-desc">Real-time metrics from localStorage</div></div></div>
+      <div class="screen-pill" onclick="selScreen(4)" data-idx="4"><div class="screen-pill-num">5</div><div><div class="screen-pill-name">Templates</div><div class="screen-pill-desc">Reply library → injected into AI</div></div></div>
+      <div class="screen-pill" onclick="selScreen(5)" data-idx="5"><div class="screen-pill-num">6</div><div><div class="screen-pill-name">Settings</div><div class="screen-pill-desc">API key · model · billing · data</div></div></div>
+    </div>
+    <div class="detail-box" id="screen-detail"></div>
+  </div>
+
+  <!-- ═══════════ SECTION: DATA SCHEMA ═══════════ -->
+  <div class="tab-pane" id="sec-data">
+    <div class="section-label"><i class="ti ti-database" aria-hidden="true"></i> localStorage keys</div>
+    <div class="card" style="margin-bottom:20px;overflow-x:auto">
+      <table class="dtable">
+        <thead><tr><th>Key</th><th>Type</th><th>Contains</th><th>Written by</th></tr></thead>
+        <tbody>
+          <tr><td><span class="inline-code">chatflow_api_key</span></td><td><span class="badge b-gray">string</span></td><td>Anthropic API key</td><td>Settings → API Config</td></tr>
+          <tr><td><span class="inline-code">chatflow_bots</span></td><td><span class="badge b-gray">JSON array</span></td><td>All bot objects with KB</td><td>Bot Builder CRUD</td></tr>
+          <tr><td><span class="inline-code">chatflow_templates</span></td><td><span class="badge b-gray">JSON array</span></td><td>All reply templates</td><td>Templates CRUD</td></tr>
+          <tr><td><span class="inline-code">chatflow_conversations</span></td><td><span class="badge b-gray">JSON array</span></td><td>Conversations + message history</td><td>Conversations screen</td></tr>
+          <tr><td><span class="inline-code">chatflow_analytics</span></td><td><span class="badge b-gray">JSON array</span></td><td>Per-message interaction logs</td><td>Auto after every AI reply</td></tr>
+          <tr><td><span class="inline-code">chatflow_settings</span></td><td><span class="badge b-gray">JSON object</span></td><td>max_tokens, temperature, language_pref</td><td>Settings screen</td></tr>
+          <tr><td><span class="inline-code">chatflow_onboarded</span></td><td><span class="badge b-gray">boolean</span></td><td>Has user completed onboarding?</td><td>Onboarding wizard</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <div class="section-label"><i class="ti ti-robot" aria-hidden="true"></i> Bot object</div>
+        <div class="code-block">{
+  <span class="k">id</span>: <span class="s">"uuid"</span>,
+  <span class="k">name</span>: <span class="s">"WhatsApp Main Bot"</span>,
+  <span class="k">businessName</span>: <span class="s">"Nour Fashion"</span>,
+  <span class="k">businessType</span>: <span class="s">"Fashion"</span>,
+  <span class="k">platform</span>: [<span class="s">"whatsapp"</span>, <span class="s">"instagram"</span>],
+  <span class="k">status</span>: <span class="s">"live"</span> | <span class="s">"paused"</span>,
+  <span class="k">workingHours</span>: { start: <span class="s">"09:00"</span>, end: <span class="s">"23:00"</span> },
+  <span class="k">products</span>: <span class="s">"Women's dresses..."</span>,
+  <span class="k">priceRange</span>: <span class="s">"EGP 250-750"</span>,
+  <span class="k">delivery</span>: <span class="s">"2-3 days Cairo..."</span>,
+  <span class="k">payment</span>: [<span class="s">"cod"</span>, <span class="s">"vodafone"</span>],
+  <span class="k">returnPolicy</span>: <span class="s">"14 days..."</span>,
+  <span class="k">customFAQs</span>: [{ q: <span class="s">"..."</span>, a: <span class="s">"..."</span> }],
+  <span class="k">templateIds</span>: [<span class="s">"uuid1"</span>, <span class="s">"uuid2"</span>],
+  <span class="k">createdAt</span>: 1720000000000
+}</div>
+      </div>
+      <div>
+        <div class="section-label"><i class="ti ti-chart-bar" aria-hidden="true"></i> Analytics log (per AI reply)</div>
+        <div class="code-block">{
+  <span class="k">id</span>: <span class="s">"uuid"</span>,
+  <span class="k">timestamp</span>: 1720000000000,
+  <span class="k">conversationId</span>: <span class="s">"uuid"</span>,
+  <span class="k">botId</span>: <span class="s">"uuid"</span>,
+  <span class="k">platform</span>: <span class="s">"whatsapp"</span> | <span class="s">"instagram"</span> | <span class="s">"test"</span>,
+  <span class="k">language</span>: <span class="s">"ar"</span> | <span class="s">"en"</span>,
+  <span class="k">responseTimeMs</span>: 1240,
+  <span class="k">tokensUsed</span>: 87,
+  <span class="k">escalated</span>: false,
+  <span class="k">templateTriggered</span>: <span class="s">"price_inquiry"</span> | null
+}</div>
+
+        <div class="callout" style="margin-top:12px">
+          <strong>Data flow:</strong> Every screen reads localStorage on mount. Every action writes immediately. Analytics aggregates <span class="inline-code">chatflow_analytics</span> — metrics update live as conversations happen.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SECTION: CHECKLIST ═══════════ -->
+  <div class="tab-pane" id="sec-checklist">
+    <div class="section-label"><i class="ti ti-checklist" aria-hidden="true"></i> Pre-launch test checklist</div>
+    <div class="callout" style="margin-bottom:16px">
+      Progress saves in your browser. Complete all items before handing the prompt to Replit AI.
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div style="flex:1">
+        <div style="font-size:13px;color:var(--muted);margin-bottom:5px"><span id="ck-done">0</span> / <span id="ck-total">0</span> completed</div>
+        <div class="pbar"><div class="pbar-fill" id="ck-bar" style="width:0%"></div></div>
+      </div>
+      <button onclick="resetChecks()" style="font-size:12px;padding:7px 14px;border:1px solid var(--border);background:none;border-radius:8px;cursor:pointer;color:var(--muted)">Reset all</button>
+    </div>
+
+    <div class="card" id="checklist-body"></div>
+
+    <div class="callout warn" style="margin-top:16px">
+      <strong>Warning:</strong> localStorage is browser-specific. If you open ChatFlow in a different browser or clear cache, all bots and conversations are gone. Always export a backup before clearing.
+    </div>
+  </div>
+
+  <!-- USER FLOW SECTION -->
+  <div class="tab-pane" id="sec-userflow">
+
+    <div class="uf-intro">
+      <div class="uf-intro-title">User Journey Flows</div>
+      <div class="uf-intro-sub">6 complete flows showing every path a user takes through ChatFlow — from onboarding to daily use. Click any flow card to explore step by step.</div>
+    </div>
+
+    <!-- Flow selector cards -->
+    <div class="uf-flow-cards" id="uf-flow-cards"></div>
+
+    <!-- Step-by-step viewer -->
+    <div class="uf-viewer" id="uf-viewer" style="display:none">
+      <div class="uf-viewer-header" id="uf-viewer-header"></div>
+      <div class="uf-viewer-body">
+        <div class="uf-steps-col" id="uf-steps-col"></div>
+        <div class="uf-detail-col" id="uf-detail-col"></div>
+      </div>
+      <div class="uf-viewer-footer" id="uf-viewer-footer"></div>
+    </div>
+
+  </div>
+
+</div><!-- end main-wrap -->
+
+<style>
+/* USER FLOW ADDED STYLES */
+.flow-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid var(--border);background:var(--white);border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;color:var(--muted);transition:all .15s;font-family:var(--font)}
+.flow-pill:hover,.flow-pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.uf-intro{margin-bottom:20px}
+.uf-intro-title{font-size:18px;font-weight:600;color:var(--text);margin-bottom:6px}
+.uf-intro-sub{font-size:13px;color:var(--muted);max-width:600px;line-height:1.6}
+.uf-flow-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+@media(max-width:700px){.uf-flow-cards{grid-template-columns:1fr}}
+.uf-flow-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.uf-flow-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.uf-flow-card.active-card{border-color:var(--navy);border-width:2px}
+.ufc-num{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ufc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;flex-shrink:0}
+.ufc-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.ufc-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.ufc-steps-count{font-size:11px;color:var(--teal);font-weight:500}
+.ufc-bar{position:absolute;left:0;bottom:0;right:0;height:3px}
+.uf-viewer{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:24px}
+.uf-viewer-header{background:var(--navy);padding:16px 20px;display:flex;align-items:center;gap:12px}
+.uf-vh-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.uf-vh-title{font-size:15px;font-weight:600;color:#fff}
+.uf-vh-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
+.uf-viewer-body{display:grid;grid-template-columns:260px 1fr;min-height:400px}
+@media(max-width:700px){.uf-viewer-body{grid-template-columns:1fr}}
+.uf-steps-col{border-right:1px solid var(--border);background:var(--bg)}
+.uf-step-item{display:flex;gap:0;cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s}
+.uf-step-item:last-child{border-bottom:none}
+.uf-step-item:hover{background:rgba(26,122,110,.05)}
+.uf-step-item.active{background:#F0FDF9;border-left:3px solid var(--teal)}
+.uf-si-left{width:44px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding-top:14px;padding-bottom:4px}
+.uf-si-num{width:22px;height:22px;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.uf-si-line{width:2px;flex:1;min-height:12px;margin-top:4px;border-radius:99px}
+.uf-si-body{flex:1;padding:12px 12px 12px 0}
+.uf-si-title{font-size:12px;font-weight:600;margin-bottom:2px;line-height:1.4}
+.uf-si-sub{font-size:10px;color:var(--muted);line-height:1.4}
+.uf-si-badge{display:inline-block;font-size:9px;font-weight:600;padding:1px 6px;border-radius:20px;margin-top:5px;border:1px solid transparent}
+.uf-detail-col{padding:20px;overflow-y:auto}
+.uf-d-step-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:6px}
+.uf-d-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.3}
+.uf-d-what{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;border-left:3px solid var(--border);padding-left:12px}
+.uf-d-section{margin-bottom:16px}
+.uf-d-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.uf-action-box{background:#F0FDF9;border:1px solid #9FE1CB;border-radius:8px;padding:10px 12px;font-size:12px;color:#0F5045;margin-bottom:12px;display:flex;align-items:flex-start;gap:8px}
+.uf-decision-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:12px}
+.uf-decision-q{font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.uf-branches{display:flex;gap:8px;flex-wrap:wrap}
+.uf-branch{flex:1;min-width:100px;padding:8px 10px;border-radius:7px;font-size:11px;line-height:1.5}
+.uf-branch.yes{background:#F0FDF9;border:1px solid #9FE1CB;color:#0F5045}
+.uf-branch.no{background:#FEF2F2;border:1px solid #FCA5A5;color:#991B1B}
+.uf-branch.alt{background:#FFFBEB;border:1px solid #FCD34D;color:#92400E}
+.uf-branch-lbl{font-size:10px;font-weight:700;margin-bottom:3px}
+.uf-api-list{display:flex;flex-direction:column;gap:5px}
+.uf-api-item{display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:var(--bg);border-radius:7px;font-size:11px;font-family:var(--mono)}
+.uf-api-n{width:18px;height:18px;border-radius:50%;background:var(--teal);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.uf-data-list{display:flex;flex-direction:column;gap:2px}
+.uf-data-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px}
+.uf-data-item:last-child{border-bottom:none}
+.uf-data-icon{font-size:13px;color:var(--teal);width:18px;text-align:center;flex-shrink:0}
+.uf-data-key{font-family:var(--mono);font-size:10px;background:var(--bg);border:1px solid var(--border);padding:1px 6px;border-radius:4px;color:var(--muted);flex-shrink:0}
+.uf-screen-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.uf-screen-btn{display:inline-flex;align-items:center;gap:5px;background:var(--navy);color:#fff;font-size:11px;font-weight:500;padding:5px 10px;border-radius:6px;cursor:pointer;border:none;font-family:var(--font);transition:opacity .15s}
+.uf-screen-btn:hover{opacity:.85}
+.uf-viewer-footer{padding:14px 20px;border-top:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:space-between}
+.uf-progress-dots{display:flex;align-items:center;gap:5px}
+.uf-dot{width:7px;height:7px;border-radius:50%;transition:all .2s}
+.uf-nav-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);background:var(--white);border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;color:var(--text);transition:all .15s;font-family:var(--font)}
+.uf-nav-btn:hover:not(:disabled){border-color:var(--teal);color:var(--teal)}
+.uf-nav-btn:disabled{opacity:.3;cursor:not-allowed}
+.uf-nav-btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.uf-nav-btn.primary:hover:not(:disabled){opacity:.9;color:#fff}
+.uf-back-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;color:var(--muted);font-family:var(--font);margin-bottom:16px;display:inline-flex;align-items:center;gap:5px}
+.uf-back-btn:hover{border-color:var(--teal);color:var(--teal)}
+</style>
+<script>
+
+// ─── SECTION SWITCHING ───
+function showSection(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-btn,.hnav-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('sec-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  var tb=document.getElementById('tab-'+id);
+  if(tb)tb.classList.add('active');
+  if(id==='userflow' && typeof FLOW_CARDS !== 'undefined'){renderFlowCards();}
+}
+function copyLink(){
+  try{navigator.clipboard.writeText(window.location.href);}catch(e){}
+  alert('Link copied! Share this file with your team.');
+}
+
+// ─── APP DATA ───
+const CONVS=[
+  {id:0,name:'Sara Ahmed',ini:'SA',col:'#1A7A6E',prev:'Is the red dress available in M?',time:'2m',plat:'WhatsApp',status:'replied',msgs:[
+    {s:'cust',t:'Hi! Is the red dress available in size M?'},
+    {s:'bot',t:'Hi Sara! Yes, the Red Floral Dress is available in Size M. Would you like to place an order?'},
+    {s:'cust',t:'Yes please! How much is it?'},
+    {s:'bot',t:'Great choice! The Red Floral Dress (Size M) is EGP 450. Free delivery above EGP 500!'},
+  ]},
+  {id:1,name:'Khalid Hassan',ini:'KH',col:'#534AB7',prev:'Order #1042 status?',time:'5m',plat:'Instagram',status:'replied',msgs:[
+    {s:'cust',t:'What is the status of order #1042?'},
+    {s:'bot',t:'Hi Khalid! Order #1042 is confirmed and being prepared. Delivery in 2-3 days.'},
+  ]},
+  {id:2,name:'Nour Ibrahim',ini:'NI',col:'#854F0B',prev:'Do you deliver to Maadi?',time:'8m',plat:'WhatsApp',status:'pending',msgs:[
+    {s:'cust',t:'Do you deliver to Maadi?'},
+  ]},
+  {id:3,name:'Ahmed Fathy',ini:'AF',col:'#A32D2D',prev:'I want to cancel my order',time:'22m',plat:'WhatsApp',status:'escalated',msgs:[
+    {s:'cust',t:'I want to cancel my order'},
+    {s:'bot',t:'Hi Ahmed, I understand. Connecting you with our team now — someone responds within 5 minutes.'},
+  ]},
+  {id:4,name:'Layla Omar',ini:'LO',col:'#0F6E56',prev:'Price for 2 pieces?',time:'15m',plat:'Instagram',status:'replied',msgs:[
+    {s:'cust',t:'What is the price if I buy 2 pieces?'},
+    {s:'bot',t:'Hi Layla! 2 pieces = 10% off = EGP 810 instead of EGP 900. Free delivery included!'},
+  ]},
+];
+const TPLS=[
+  {name:'Price inquiry — Arabic',cat:'Sales',lang:'🇸🇦',triggers:['كم السعر','السعر','price'],preview:'مرحباً! سعر [المنتج] هو [السعر] جنيه. للطلب رد YES',uses:1247},
+  {name:'Price inquiry — English',cat:'Sales',lang:'🇬🇧',triggers:['price','how much','cost'],preview:'Hi! The price for [product] is EGP [price]. Reply YES to order!',uses:892},
+  {name:'Delivery time',cat:'Delivery',lang:'🇸🇦🇬🇧',triggers:['delivery','شحن','توصيل'],preview:'Delivery 2-3 days Cairo, 4-5 outside, free above EGP 500',uses:743},
+  {name:'Out of stock',cat:'Inventory',lang:'🇸🇦🇬🇧',triggers:['available','متوفر'],preview:'This item is out of stock. We will notify you when available.',uses:234},
+  {name:'Order confirmation',cat:'Orders',lang:'🇸🇦🇬🇧',triggers:['order','طلب','confirm'],preview:'Your order #[ORDER_ID] is confirmed! Track at...',uses:612},
+  {name:'Return policy',cat:'Returns',lang:'🇸🇦🇬🇧',triggers:['return','refund','رجوع'],preview:'We accept returns within 14 days. Item must be unused.',uses:289},
+];
+const WEEK=[{d:'Mon',v:142},{d:'Tue',v:198},{d:'Wed',v:176},{d:'Thu',v:234},{d:'Fri',v:289},{d:'Sat',v:312},{d:'Sun',v:267}];
+const TRIGS=[{l:'Price inquiry',v:340},{l:'Availability',v:280},{l:'Delivery',v:195},{l:'Order status',v:167},{l:'Returns',v:89}];
+const BOT_R={'price':'The price ranges from EGP 250-750. Which item are you interested in?','سعر':'مرحباً! الأسعار تتراوح بين ٢٥٠ و ٧٥٠ جنيه. أي منتج يهمك؟','delivery':'Delivery 2-3 days in Cairo, 4-5 outside. Free above EGP 500!','شحن':'التوصيل ٢-٣ أيام داخل القاهرة. مجاني فوق ٥٠٠ جنيه.','available':'Yes, most items available! Tell me the product and size.','متوفر':'نعم متوفر! أخبرني بالمنتج والمقاس.','cancel':'Connecting you with our team now. They\'ll respond within 5 minutes.','default':'Thanks for your message! Ask me about prices, availability, or delivery.'};
+
+let curConv=0,humanMode=false,convFilter='all',onbStep=1;
+let toastT;
+
+function pToast(m){const t=document.getElementById('p-toast');t.textContent=m;t.style.display='block';clearTimeout(toastT);toastT=setTimeout(()=>t.style.display='none',2400);}
+function openM(){document.getElementById('modal-bg').classList.add('open')}
+function closeM(){document.getElementById('modal-bg').classList.remove('open')}
+function saveTpl(){closeM();pToast('Template saved successfully');}
+function toggleND(){document.getElementById('nd').classList.toggle('open')}
+function closeND(){document.getElementById('nd').classList.remove('open')}
+
+function gp(p){
+  document.querySelectorAll('.p-page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
+  document.getElementById('pp-'+p).classList.add('active');
+  const ni=document.getElementById('pnav-'+p);if(ni)ni.classList.add('active');
+  document.getElementById('pbc').textContent={dashboard:'Dashboard',onboarding:'Setup wizard',bots:'Bot builder',conversations:'Conversations',analytics:'Analytics',templates:'Templates',settings:'Settings'}[p]||p;
+  closeND();
+  if(p==='conversations')renderCVList();
+  if(p==='analytics')renderAnalytics();
+  if(p==='templates')renderTpls();
+  if(p==='onboarding')renderOnb();
+}
+
+function sBT(i){document.querySelectorAll('.bt').forEach((b,j)=>b.classList.toggle('active',i===j));document.querySelectorAll('.bp').forEach((b,j)=>b.classList.toggle('active',i===j));}
+function sST(i){document.querySelectorAll('.st').forEach((b,j)=>b.classList.toggle('active',i===j));document.querySelectorAll('.sp').forEach((b,j)=>b.classList.toggle('active',i===j));}
+
+function renderBarChart(cid,lid,data,maxH){
+  const c=document.getElementById(cid),l=document.getElementById(lid);if(!c||!l)return;
+  const mx=Math.max(...data.map(x=>x.v));
+  c.innerHTML=data.map(x=>`<div class="p-bar" style="height:${Math.round((x.v/mx)*maxH)}px" title="${x.d}: ${x.v}"></div>`).join('');
+  l.innerHTML=data.map(x=>`<div class="p-bar-lbl">${x.d}</div>`).join('');
+}
+function renderTrigBars(cid,data){
+  const el=document.getElementById(cid);if(!el)return;
+  const mx=data[0].v;
+  el.innerHTML=data.map(t=>`<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;color:#64748B">${t.l}</span><span style="font-size:10px;font-weight:600">${t.v}</span></div><div style="background:#F0F4F8;border-radius:99px;height:4px"><div style="width:${Math.round((t.v/mx)*100)}%;height:4px;background:#1A7A6E;border-radius:99px"></div></div></div>`).join('');
+}
+function renderAnalytics(){
+  const d14=Array.from({length:14},(_,i)=>({d:['M','T','W','T','F','S','S','M','T','W','T','F','S','S'][i],v:Math.round(80+Math.random()*260)}));
+  const el=document.getElementById('a-ch');if(!el)return;
+  const lel=document.getElementById('a-lbl');
+  const mx=Math.max(...d14.map(x=>x.v));
+  el.innerHTML=d14.map(x=>`<div class="a-bar" style="height:${Math.round((x.v/mx)*76)}px"></div>`).join('');
+  if(lel)lel.innerHTML=d14.map(x=>`<div class="p-bar-lbl">${x.d}</div>`).join('');
+  renderTrigBars('a-trigs',TRIGS);
+  const pt=document.getElementById('a-perf');if(!pt)return;
+  pt.innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:11px"><thead><tr><th style="padding:5px 8px;text-align:left;color:#64748B;border-bottom:1px solid #F0F4F8;font-size:10px;font-weight:600">Template</th><th style="padding:5px 8px;text-align:right;color:#64748B;border-bottom:1px solid #F0F4F8;font-size:10px;font-weight:600">Used</th><th style="padding:5px 8px;text-align:right;color:#64748B;border-bottom:1px solid #F0F4F8;font-size:10px;font-weight:600">Success</th></tr></thead><tbody>${[{n:'Price inquiry',u:1247,r:'96.2%'},{n:'Availability',u:987,r:'94.8%'},{n:'Delivery info',u:743,r:'93.1%'},{n:'Order status',u:612,r:'91.4%'}].map(r=>`<tr><td style="padding:5px 8px;font-weight:500">${r.n}</td><td style="padding:5px 8px;text-align:right">${r.u.toLocaleString()}</td><td style="padding:5px 8px;text-align:right"><span class="badge b-green">${r.r}</span></td></tr>`).join('')}</tbody></table>`;
+}
+function setAR(d,btn){
+  document.querySelectorAll('#pp-analytics .icon-b').forEach(b=>b.style.background='');
+  btn.style.background='#F0F4F8';
+  const m={7:{t:'8,432',r:'94.7%',c:'$0.89'},30:{t:'34,200',r:'95.1%',c:'$3.42'},0:{t:'127,400',r:'93.8%',c:'$12.74'}}[d]||{};
+  if(document.getElementById('a-tot'))document.getElementById('a-tot').textContent=m.t;
+  if(document.getElementById('a-res'))document.getElementById('a-res').textContent=m.r;
+  if(document.getElementById('a-cost'))document.getElementById('a-cost').textContent=m.c;
+  renderAnalytics();
+}
+function renderTpls(){
+  const el=document.getElementById('tpl-list');if(!el)return;
+  el.innerHTML=TPLS.map(t=>`<div class="tpl-c"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px"><div><div class="tpl-nm">${t.lang} ${t.name}</div><div style="margin-top:4px">${t.triggers.map(x=>`<span class="chip teal">${x}</span>`).join('')}</div></div><span class="badge b-gray">${t.cat}</span></div><div class="tpl-pr">${t.preview}</div><div class="tpl-ft"><span style="font-size:10px;color:#94A3B8">Used ${t.uses.toLocaleString()}×</span><button class="icon-b" onclick="pToast('Editing: ${t.name}')" style="margin-left:auto;font-size:11px"><i class="ti ti-edit" aria-hidden="true"></i></button><button class="icon-b" onclick="pToast('Template deleted')" style="font-size:11px;color:#DC2626"><i class="ti ti-trash" aria-hidden="true"></i></button></div></div>`).join('');
+}
+function renderBotTpls(){
+  const el=document.getElementById('btp2-list');if(!el)return;
+  el.innerHTML=TPLS.slice(0,3).map(t=>`<div style="display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid #F0F4F8"><span style="font-size:12px">${t.lang}</span><div style="flex:1"><div style="font-size:11px;font-weight:600">${t.name}</div></div><span class="badge b-green" style="font-size:9px">Active</span></div>`).join('');
+}
+function renderBotCards(){
+  const el=document.getElementById('bot-cards');if(!el)return;
+  const bots=[{n:'WhatsApp main bot',p:'WhatsApp',s:'live',r:847},{n:'Instagram shop bot',p:'Instagram',s:'live',r:437},{n:'Order status bot',p:'WhatsApp',s:'paused',r:0}];
+  el.innerHTML=bots.map(b=>`<div class="mc" style="cursor:pointer" onclick="pToast('Editing: ${b.n}')"><div class="mc-head"><span class="mc-title" style="font-size:12px">${b.n}</span><span class="badge ${b.s==='live'?'b-green':'b-amber'}">${b.s==='live'?'Live':'Paused'}</span></div><div style="font-size:10px;color:#64748B;margin-bottom:8px">${b.p} · ${b.s==='live'?b.r+' replies/wk':'Last active 3 days ago'}</div><div style="display:flex;gap:5px"><button class="icon-b" onclick="event.stopPropagation();sBT(3)" style="font-size:10px">Edit</button><button class="icon-b" onclick="event.stopPropagation();pToast('Bot ${b.s==='live'?'paused':'resumed'}')" style="font-size:10px">${b.s==='live'?'Pause':'Resume'}</button></div></div>`).join('');
+}
+function renderDashConvs(){
+  const el=document.getElementById('d-convs');if(!el)return;
+  el.innerHTML=CONVS.slice(0,4).map(c=>`<li class="c-item" onclick="gp('conversations');selConv(${c.id})"><div class="c-av" style="background:${c.col}">${c.ini}</div><div class="c-body"><div class="c-name">${c.name}</div><div class="c-prev">${c.prev}</div></div><div style="text-align:right"><div class="c-time">${c.time}</div><div class="c-dot" style="background:${c.status==='replied'?'#10B981':c.status==='pending'?'#F59E0B':'#EF4444'};margin-left:auto"></div></div></li>`).join('');
+}
+function renderCVList(){
+  const el=document.getElementById('cv-list');if(!el)return;
+  const f=convFilter==='all'?CONVS:CONVS.filter(c=>c.status===convFilter);
+  el.innerHTML=f.map(c=>`<li class="c-item ${c.id===curConv?'sel':''}" onclick="selConv(${c.id})"><div class="c-av" style="background:${c.col};width:26px;height:26px;font-size:9px">${c.ini}</div><div class="c-body"><div class="c-name">${c.name}</div><div class="c-prev">${c.prev}</div></div><div style="text-align:right"><div class="c-time">${c.time}</div><div class="c-dot" style="background:${c.status==='replied'?'#10B981':c.status==='pending'?'#F59E0B':'#EF4444'};margin-left:auto"></div></div></li>`).join('');
+  selConv(curConv);
+}
+function selConv(id){
+  curConv=id;humanMode=false;
+  const c=CONVS.find(x=>x.id===id)||CONVS[0];
+  document.getElementById('cv-av').textContent=c.ini;
+  document.getElementById('cv-av').style.background=c.col;
+  document.getElementById('cv-name').textContent=c.name;
+  document.getElementById('cv-plat').textContent=c.plat+(c.status==='escalated'?' · Escalated':' · Bot active');
+  const bd=document.getElementById('cv-badge');
+  bd.textContent=c.status==='escalated'?'Escalated':'Bot active';
+  bd.className='badge '+(c.status==='escalated'?'b-red':'b-teal');
+  const bb=document.getElementById('cv-banner');
+  if(c.status==='escalated'){bb.className='esc-banner';bb.innerHTML='<i class="ti ti-alert-triangle" style="font-size:11px;margin-right:3px" aria-hidden="true"></i>Escalated — human review needed';}
+  else{bb.className='bot-banner';bb.innerHTML='<span><i class="ti ti-robot" style="font-size:11px;margin-right:3px" aria-hidden="true"></i>Bot is handling</span><button class="takeover-mini" onclick="toggleHM()">Human mode</button>';}
+  const msgs=document.getElementById('cv-msgs');
+  msgs.innerHTML=c.msgs.map(m=>`<div class="msg ${m.s}"><div class="msg-b">${m.t}</div><div class="msg-meta">${m.s==='bot'?'<i class="ti ti-robot" style="font-size:9px" aria-hidden="true"></i> ChatFlow Bot':'👤 '+c.name}</div></div>`).join('');
+  msgs.scrollTop=msgs.scrollHeight;
+  document.querySelectorAll('#cv-list .c-item').forEach((li,i)=>{const f=convFilter==='all'?CONVS:CONVS.filter(x=>x.status===convFilter);li.classList.toggle('sel',f[i]&&f[i].id===id);});
+}
+function fConv(f,btn){convFilter=f;document.querySelectorAll('.cft').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderCVList();}
+function toggleHM(){
+  humanMode=!humanMode;
+  const c=CONVS.find(x=>x.id===curConv)||CONVS[0];
+  const bb=document.getElementById('cv-banner');
+  if(humanMode){bb.innerHTML='<span style="color:#185FA5"><i class="ti ti-user" style="font-size:11px;margin-right:3px" aria-hidden="true"></i>You are now handling</span><button class="takeover-mini" style="border-color:#B5D4F4;color:#185FA5" onclick="toggleHM()">Return to bot</button>';document.getElementById('cv-badge').className='badge b-navy';document.getElementById('cv-badge').textContent='Human mode';document.getElementById('cv-inp').placeholder='Type your reply...';}
+  else{bb.innerHTML='<span><i class="ti ti-robot" style="font-size:11px;margin-right:3px" aria-hidden="true"></i>Bot is handling</span><button class="takeover-mini" onclick="toggleHM()">Human mode</button>';document.getElementById('cv-badge').className='badge b-teal';document.getElementById('cv-badge').textContent='Bot active';document.getElementById('cv-inp').placeholder='Bot is handling — type to override...';}
+}
+function cvSend(){
+  const inp=document.getElementById('cv-inp');const txt=inp.value.trim();if(!txt)return;
+  const c=CONVS.find(x=>x.id===curConv)||CONVS[0];
+  c.msgs.push({s:'cust',t:txt});inp.value='';
+  const msgs=document.getElementById('cv-msgs');
+  msgs.innerHTML+=`<div class="msg cust"><div class="msg-b">${txt}</div><div class="msg-meta">👤 ${c.name}</div></div>`;
+  msgs.scrollTop=msgs.scrollHeight;
+  if(!humanMode){
+    const low=txt.toLowerCase();
+    const k=Object.keys(BOT_R).find(k=>low.includes(k))||'default';
+    setTimeout(()=>{const r=BOT_R[k];c.msgs.push({s:'bot',t:r});msgs.innerHTML+=`<div class="msg bot"><div class="msg-b">${r}</div><div class="msg-meta"><i class="ti ti-robot" style="font-size:9px" aria-hidden="true"></i> ChatFlow Bot</div></div>`;msgs.scrollTop=msgs.scrollHeight;},700);
+  }
+}
+function botReply(txt){const low=txt.toLowerCase();const k=Object.keys(BOT_R).find(k=>low.includes(k))||'default';return BOT_R[k];}
+function qSend(){
+  const inp=document.getElementById('q-inp');const txt=inp.value.trim();if(!txt)return;inp.value='';
+  const chat=document.getElementById('q-chat');
+  if(chat.style.color==='rgb(148, 163, 184)')chat.style.color='';
+  chat.innerHTML=(chat.innerHTML.includes('Type below')?'':chat.innerHTML)+`<div style="margin-bottom:5px"><span style="font-size:9px;color:#94A3B8">You:</span> <span style="font-size:11px">${txt}</span></div>`;
+  setTimeout(()=>{chat.innerHTML+=`<div style="margin-bottom:5px;padding:5px 7px;background:#D4F0EB;border-radius:6px;font-size:11px;color:#0F5045"><i class="ti ti-robot" style="font-size:10px;margin-right:3px" aria-hidden="true"></i>${botReply(txt)}</div>`;chat.scrollTop=chat.scrollHeight;},700);
+}
+function tSend(){
+  const inp=document.getElementById('t-inp');const txt=inp.value.trim();if(!txt)return;inp.value='';
+  const chat=document.getElementById('t-chat');
+  chat.innerHTML+=`<div class="msg cust" style="align-self:flex-start;max-width:90%"><div class="msg-b" style="font-size:10px">${txt}</div></div>`;
+  chat.scrollTop=chat.scrollHeight;
+  setTimeout(()=>{const r=botReply(txt);chat.innerHTML+=`<div class="msg bot" style="align-self:flex-end;max-width:90%"><div class="msg-b" style="font-size:10px">${r}</div></div>`;chat.scrollTop=chat.scrollHeight;},600);
+}
+const TEST_SC=[{l:'Arabic price',m:'ما سعر الفستان؟',e:true},{l:'English availability',m:'Is it available?',e:true},{l:'Delivery question',m:'How long is delivery?',e:true},{l:'Escalation trigger',m:'I want to cancel my order',e:true,esc:true},{l:'Payment question',m:'What payment methods?',e:true}];
+function runTests(){
+  const el=document.getElementById('t-results');if(!el)return;
+  el.innerHTML='<div style="font-size:10px;color:#64748B">Running...</div>';
+  setTimeout(()=>{
+    el.innerHTML=`<table><thead><tr><th>Scenario</th><th>Status</th></tr></thead><tbody>${TEST_SC.map(s=>`<tr><td style="padding:4px 6px;font-weight:500;font-size:10px">${s.l}</td><td style="padding:4px 6px"><span class="badge ${s.esc?'b-amber':'b-green'}" style="font-size:9px">${s.esc?'Escalated':'Pass'}</span></td></tr>`).join('')}</tbody></table>`;
+    pToast('5/5 scenarios passed');
+  },1200);
+}
+function testAPI(){
+  const k=document.getElementById('api-k');
+  const ok=document.getElementById('api-ok');const err=document.getElementById('api-err');
+  ok.style.display='none';err.style.display='none';
+  if(k&&k.value.startsWith('sk-ant')){ok.style.display='block';}else{err.style.display='block';}
+}
+const ONB_D=[
+  {icon:'ti-key',t:'Connect your AI brain',d:'Paste your Anthropic API key. Get one free at console.anthropic.com.',body:`<div class="f-row"><label class="f-lbl">API key</label><input class="f-inp" id="onb-k" type="password" placeholder="sk-ant-api03-..."></div><div style="display:flex;gap:6px;margin-bottom:8px"><button class="btn-p" onclick="testOnbAPI()" style="font-size:11px">Test connection</button></div><div class="api-ok" id="onb-ok" style="font-size:11px"><i class="ti ti-circle-check" aria-hidden="true"></i> Connected — Claude is ready</div>`},
+  {icon:'ti-robot',t:'Create your first bot',d:'Tell the bot what you sell. This becomes its AI knowledge.',body:`<div class="f-row"><label class="f-lbl">Business name</label><input class="f-inp" placeholder="e.g. Nour Fashion"></div><div class="f-row"><label class="f-lbl">What you sell</label><textarea class="f-ta" placeholder="Women's dresses, sizes S-XL, EGP 250-750..."></textarea></div>`},
+  {icon:'ti-sparkles',t:"You're all set!",d:'Your bot is live and ready to reply to customers 24/7.',body:`<div style="text-align:center;padding:8px 0"><div style="font-size:32px;margin-bottom:6px">🎉</div><div style="font-size:12px;color:#64748B">Demo Shop Bot is live. Go to Conversations to see it in action.</div></div>`},
+];
+function renderOnb(){
+  const steps=document.getElementById('o-steps');
+  if(steps){steps.innerHTML=[1,2,3].map(i=>`<div class="os ${i<onbStep?'done':i===onbStep?'cur':'todo'}">${i<onbStep?'✓':i}</div>${i<3?'<div class="onb-line"></div>':''}`).join('');}
+  const s=ONB_D[onbStep-1];const isLast=onbStep===3;
+  document.getElementById('o-body').innerHTML=`<div class="onb-card"><div class="onb-icon"><i class="ti ${s.icon}" aria-hidden="true"></i></div><div class="onb-title">${s.t}</div><div class="onb-desc">${s.d}</div>${s.body}<div style="display:flex;gap:8px;margin-top:14px">${onbStep>1?`<button class="btn-s" onclick="onbBack()" style="font-size:11px">Back</button>`:''}<button class="btn-p" onclick="${isLast?`gp('dashboard')`:`onbNext()`}" style="font-size:11px;margin-left:auto">${isLast?'Go to dashboard →':'Continue →'}</button></div></div>`;
+}
+function onbNext(){if(onbStep<3){onbStep++;renderOnb();}}
+function onbBack(){if(onbStep>1){onbStep--;renderOnb();}}
+function testOnbAPI(){const el=document.getElementById('onb-ok');if(el)el.style.display='block';}
+function renderBillTbl(){
+  const el=document.getElementById('bill-tbl');if(!el)return;
+  el.innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed"><thead><tr><th style="padding:6px 8px;text-align:left;font-size:10px;color:#64748B;border-bottom:1px solid #F0F4F8">Feature</th><th style="padding:6px 8px;text-align:center;font-size:10px;color:#64748B;border-bottom:1px solid #F0F4F8">Starter<br>EGP 199</th><th style="padding:6px 8px;text-align:center;font-size:10px;color:#1A7A6E;border-bottom:1px solid #F0F4F8;background:#F0FDF9">Pro ✓<br>EGP 349</th><th style="padding:6px 8px;text-align:center;font-size:10px;color:#64748B;border-bottom:1px solid #F0F4F8">Business<br>EGP 499</th></tr></thead><tbody>${[{f:'Channels',s:'1',p:'2',b:'5'},{f:'Messages/mo',s:'500',p:'Unlimited',b:'Unlimited'},{f:'Templates',s:'10',p:'Unlimited',b:'Unlimited'},{f:'Support',s:'Email',p:'Priority',b:'Dedicated'}].map(r=>`<tr><td style="padding:6px 8px;font-weight:500">${r.f}</td><td style="padding:6px 8px;text-align:center;color:#64748B">${r.s}</td><td style="padding:6px 8px;text-align:center;font-weight:600;color:#1A7A6E;background:#F0FDF9">${r.p}</td><td style="padding:6px 8px;text-align:center;color:#64748B">${r.b}</td></tr>`).join('')}</tbody></table>`;
+}
+
+// ── BLUEPRINT SCREENS ──
+const SCREENS=[
+  {name:'Dashboard',purpose:'Command center showing real-time health of all bots.',elements:['4 KPI cards (messages, response rate, active bots, sales saved)','Area chart — messages per day from localStorage analytics','Platform donut chart (WhatsApp/Instagram split)','Top triggered replies bar chart','Recent conversations list (click → opens Conversations)','Quick test bot widget — real AI reply inline'],interactions:['KPI numbers update as conversations are logged','Click conversation row → navigate with chat selected','Quick test widget replies via Claude API']},
+  {name:'Bot builder',purpose:'Create, configure, and test AI bots. Knowledge base becomes Claude system prompt.',elements:['Bot cards grid (all bots from localStorage)','4-tab edit form: Basic Setup · Knowledge Base · Templates · Test Bot','Knowledge base fields (products, prices, delivery, payment, FAQs)','Live chat test interface','Auto test suite — 5 real API calls with results table'],interactions:['Edit button → expand bot form','Test Bot tab → real Claude replies with typing indicator','Run all 5 scenarios → results table with pass/fail · escalation detection','Save → writes to localStorage instantly']},
+  {name:'Conversations',purpose:'Core product — where actual AI customer conversations happen.',elements:['Split panel: conversation list (left) + chat window (right)','Filter tabs: All / Pending / Escalated','WhatsApp-style chat bubbles (customer gray, bot teal)','Bot Active / Human Mode banner','Escalation detection — auto-switches on cancel/complaint intent','Typing indicator (300ms delay)'],interactions:['Click conversation → load history from localStorage','Send message → bot replies via Claude API','Escalation auto-detected → red banner + human mode','Take over → send as navy bubbles · Return to bot → AI resumes']},
+  {name:'Analytics',purpose:'All numbers calculated from actual chatflow_analytics logs.',elements:['4 KPI cards (total messages, resolution rate, avg response, API cost)','Bar chart — messages per day (from real timestamps)','Top triggered categories','Template performance table'],interactions:['Date range buttons → filter analytics array by timestamp','All numbers update live as conversations are logged','Export button → downloads JSON']},
+  {name:'Templates',purpose:'Reply templates injected into AI system prompt for each bot.',elements:['Template cards (name, category badge, trigger chips, preview)','Language flags 🇸🇦 🇬🇧 per template','Uses counter','Full edit modal with Arabic + English textareas + variable inserter'],interactions:['Add template → modal → save to localStorage','Edit → load into form → update + sync to linked bots','Delete → confirm → remove + update bot templateIds']},
+  {name:'Settings',purpose:'API key, model config, data management.',elements:['API Configuration — key input + Test Connection (real Claude call)','Model sliders — max tokens + temperature','Billing — plan comparison table + upgrade CTA','Data management — export / import / clear / reset'],interactions:['Test Connection → real API call → show model name + latency','Sliders → save to chatflow_settings','Export → download all localStorage as JSON','Reset → confirm → clear everything except API key']},
+];
+function selScreen(idx){
+  document.querySelectorAll('.screen-pill').forEach((p,i)=>p.classList.toggle('sel',i===idx));
+  const s=SCREENS[idx];
+  const dd=document.getElementById('screen-detail');if(!dd)return;
+  dd.innerHTML=`<div style="font-size:14px;font-weight:600;margin-bottom:4px">${s.name}</div><div style="font-size:12px;color:var(--muted);margin-bottom:12px">${s.purpose}</div><div class="grid-2"><div><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:6px">UI elements</div>${s.elements.map(e=>`<div style="font-size:12px;padding:3px 0 3px 10px;border-left:2px solid var(--border);margin-bottom:3px;color:var(--muted)">${e}</div>`).join('')}</div><div><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:6px">Interactions</div>${s.interactions.map(i=>`<div style="font-size:12px;padding:3px 0 3px 10px;border-left:2px solid var(--teal);margin-bottom:3px;color:var(--muted)">${i}</div>`).join('')}</div></div>`;
+}
+
+// ── CHECKLIST ──
+const CK=[
+  {g:'API setup',items:['Opened Settings → API Configuration','Pasted Anthropic API key (sk-ant-...)','Clicked Test Connection — got green check','Model name and response time shown']},
+  {g:'Bot creation',items:['Created at least one bot in Bot Builder','Filled Business Name and Type','Added Products to Knowledge Base','Added Price Range','Added Delivery info','Selected Payment Methods','Assigned at least one Template to bot']},
+  {g:'AI test — bot builder',items:['Opened Test Bot tab','Sent Arabic message — got Arabic reply','Sent English message — got English reply','Ran all 5 test scenarios — all passed','Escalation scenario showed warning flag','Token usage shown per reply']},
+  {g:'Conversations test',items:['Created new conversation','Sent a message — bot replied automatically','Typing indicator appeared before reply','Sent "I want to cancel" — escalation triggered','Red banner appeared','Took over manually — sent as human','Returned to bot — bot replied again']},
+  {g:'Templates',items:['Created a template with trigger keywords','Assigned template to a bot','Template appeared in bot replies','Delete + confirm modal works']},
+  {g:'Analytics',items:['Analytics shows non-zero messages after tests','Resolution rate calculated correctly','Date range filter changes chart data','Export downloads JSON file']},
+  {g:'Persistence',items:['Refresh page — bots still present','Refresh page — conversations still present','Export backup successful','Import backup restores data']},
+];
+let ckState={};
+function buildChecklist(){
+  const saved=JSON.parse(localStorage.getItem('cf_ck')||'{}');ckState=saved;
+  const el=document.getElementById('checklist-body');if(!el)return;
+  let total=0,html='';
+  CK.forEach((cat,ci)=>{
+    html+=`<div class="check-group-title">${cat.g}</div>`;
+    cat.items.forEach((item,ii)=>{
+      const k=`${ci}-${ii}`;total++;
+      const checked=ckState[k]||false;
+      html+=`<div class="check-item"><input type="checkbox" id="ck-${k}" ${checked?'checked':''} onchange="toggleCK('${k}',this.checked,${total})"><label for="ck-${k}" class="check-text ${checked?'done':''}" style="cursor:pointer">${item}</label></div>`;
+    });
+  });
+  el.innerHTML=html;
+  document.getElementById('ck-total').textContent=total;
+  updateCKProgress(total);
+}
+function toggleCK(k,v){
+  ckState[k]=v;localStorage.setItem('cf_ck',JSON.stringify(ckState));
+  const lbl=document.querySelector(`label[for="ck-${k}"]`);
+  if(lbl)lbl.className='check-text '+(v?'done':'');
+  updateCKProgress(parseInt(document.getElementById('ck-total').textContent));
+}
+function updateCKProgress(total){
+  const done=Object.values(ckState).filter(Boolean).length;
+  document.getElementById('ck-done').textContent=done;
+  document.getElementById('ck-bar').style.width=Math.round((done/total)*100)+'%';
+}
+function resetChecks(){ckState={};localStorage.removeItem('cf_ck');buildChecklist();}
+
+// ── INIT ──
+renderBarChart('dash-ch','dash-lbl',WEEK,68);
+renderTrigBars('d-triggers',TRIGS);
+renderDashConvs();
+renderBotCards();
+renderBotTpls();
+renderTpls();
+renderBillTbl();
+renderOnb();
+selConv(0);
+renderAnalytics();
+buildChecklist();
+selScreen(0);
+
+// ==================== USER FLOW MODULE ====================
+// All data stored as plain objects — no template literals in data strings
+
+var UF_CURRENT_FLOW = -1;
+var UF_CURRENT_STEP = 0;
+
+var SCREEN_LABELS = {
+  dashboard: 'Dashboard',
+  onboarding: 'Setup wizard',
+  bots: 'Bot builder',
+  conversations: 'Conversations',
+  analytics: 'Analytics',
+  templates: 'Templates',
+  settings: 'Settings'
+};
+
+// Flow card definitions (display only — no HTML in strings)
+var FLOW_CARDS = [
+  {
+    num: 1,
+    icon: 'ti-user-plus',
+    iconBg: '#D4F0EB',
+    iconColor: '#0F5045',
+    barColor: '#1A7A6E',
+    title: 'New user onboarding',
+    desc: 'First visit to first AI reply — complete 3-step setup in under 5 minutes.',
+    stepCount: 6
+  },
+  {
+    num: 2,
+    icon: 'ti-robot',
+    iconBg: '#D0D8E8',
+    iconColor: '#1B2A4A',
+    barColor: '#1B2A4A',
+    title: 'Create and test a bot',
+    desc: 'Build a knowledge base, assign templates, validate with live AI before going live.',
+    stepCount: 6
+  },
+  {
+    num: 3,
+    icon: 'ti-messages',
+    iconBg: '#EAF3DE',
+    iconColor: '#3B6D11',
+    barColor: '#3B6D11',
+    title: 'Customer sends a message',
+    desc: 'Full AI pipeline — language detect, Claude API call, reply, analytics log.',
+    stepCount: 6
+  },
+  {
+    num: 4,
+    icon: 'ti-alert-triangle',
+    iconBg: '#FEE2E2',
+    iconColor: '#991B1B',
+    barColor: '#EF4444',
+    title: 'Escalation flow',
+    desc: 'Bot detects a sensitive request and hands off to the human owner seamlessly.',
+    stepCount: 6
+  },
+  {
+    num: 5,
+    icon: 'ti-repeat',
+    iconBg: '#FDF0CD',
+    iconColor: '#7A5A00',
+    barColor: '#E9C46A',
+    title: 'Daily returning user',
+    desc: 'The owner morning routine — check escalations, review analytics, tune the bot.',
+    stepCount: 6
+  },
+  {
+    num: 6,
+    icon: 'ti-template',
+    iconBg: '#EEEDFE',
+    iconColor: '#3C3489',
+    barColor: '#7C3AED',
+    title: 'Add and use a template',
+    desc: 'Create a reply template, link it to a bot, watch it shape AI responses.',
+    stepCount: 6
+  }
+];
+
+// Step definitions per flow — plain objects, no HTML strings inside data
+var FLOW_STEPS = [
+
+  // FLOW 0 — New user onboarding
+  [
+    {
+      title: 'Opens ChatFlow for the first time',
+      sub: 'App checks if user has onboarded before',
+      badge: 'Entry point', badgeBg: '#F1EFE8', badgeColor: '#444',
+      what: 'App reads chatflow_onboarded from localStorage on every load. If missing or false, the onboarding wizard shows automatically — the user never sees the dashboard first.',
+      action: 'Browser opens ChatFlow URL for the first time',
+      decisionQ: 'Has the user onboarded before?',
+      decisionYes: 'Skip wizard — go directly to Dashboard',
+      decisionNo: 'Show onboarding wizard, Step 1 of 3',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-database', key: 'chatflow_onboarded', text: 'Read — false or missing on first visit'}
+      ],
+      screens: ['onboarding']
+    },
+    {
+      title: 'Wizard Step 1 — Welcome screen',
+      sub: 'Value proposition shown — single CTA button',
+      badge: 'Onboarding', badgeBg: '#D0D8E8', badgeColor: '#1B2A4A',
+      what: 'Step 1 is orientation only. Shows the product tagline, three value points (24/7 replies, Arabic + English, no coding), and a single Get Started button. No forms yet.',
+      action: 'User reads and clicks Continue',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['onboarding']
+    },
+    {
+      title: 'Wizard Step 2 — API key setup',
+      sub: 'Paste Anthropic key and Test Connection',
+      badge: 'Critical step', badgeBg: '#FEE2E2', badgeColor: '#991B1B',
+      what: 'The single most important setup step. Without a valid API key nothing works. User pastes key from console.anthropic.com, clicks Test Connection. App makes a minimal Claude API call to verify. Green check = proceed. Red = retry.',
+      action: 'Paste key → Test Connection → get green check → Continue',
+      decisionQ: 'Does the API test succeed?',
+      decisionYes: 'Key saved to localStorage → Step 3 enabled',
+      decisionNo: 'Show error message → user checks key and retries',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-key', key: 'chatflow_api_key', text: 'Saved to localStorage on success'}
+      ],
+      screens: ['settings']
+    },
+    {
+      title: 'Wizard Step 3 — Create first bot',
+      sub: 'Business name, type, and products — 3 fields only',
+      badge: 'Onboarding', badgeBg: '#D0D8E8', badgeColor: '#1B2A4A',
+      what: 'Simplified bot creation: business name, business type dropdown, and a textarea for what they sell and price range. This is enough to make the AI useful immediately. Full knowledge base editing happens later in Bot Builder.',
+      action: 'Fill 3 fields → Create My Bot → redirected to Dashboard',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-robot', key: 'chatflow_bots', text: 'First bot object written with status: live'},
+        {icon: 'ti-check', key: 'chatflow_onboarded', text: 'Set to true — wizard never shows again'}
+      ],
+      screens: ['bots']
+    },
+    {
+      title: 'Dashboard loads with demo data',
+      sub: 'KPI cards, charts, and Quick Test widget ready',
+      badge: 'First view', badgeBg: '#D4F0EB', badgeColor: '#0F5045',
+      what: 'Dashboard renders immediately from localStorage plus seeded demo data. The Quick Test Bot widget at the bottom is immediately usable. This is the first moment the user sees something real.',
+      action: 'Dashboard visible — user notices Quick Test widget at the bottom',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['dashboard']
+    },
+    {
+      title: 'First real AI reply received',
+      sub: 'User types a message — bot replies in correct language',
+      badge: 'Goal achieved', badgeBg: '#D1FAE5', badgeColor: '#065F46',
+      what: 'User types any message in Quick Test (e.g. "ما سعر الفستان؟"). Language detected as Arabic. System prompt built from new bot knowledge base. Claude API called. Reply appears in under 2 seconds in Arabic. The product has proven its value.',
+      action: 'Type message → see AI reply → onboarding journey complete',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-chart-bar', key: 'chatflow_analytics', text: 'First interaction log written automatically'}
+      ],
+      screens: ['dashboard', 'bots']
+    }
+  ],
+
+  // FLOW 1 — Create and test a bot
+  [
+    {
+      title: 'Open Bot Builder',
+      sub: 'See all existing bot cards with status and stats',
+      badge: 'Navigation', badgeBg: '#D0D8E8', badgeColor: '#1B2A4A',
+      what: 'Bot Builder shows all bots from chatflow_bots as cards. Each card shows: name, platform, Live or Paused status, replies this week, and accuracy score. Create New Bot button top right.',
+      action: 'Click Bot Builder in sidebar',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-robot', key: 'chatflow_bots', text: 'Read — all bots rendered as cards'}],
+      screens: ['bots']
+    },
+    {
+      title: 'Tab 1 — Basic Setup',
+      sub: 'Bot name, business name, platform, working hours, status',
+      badge: 'Identity', badgeBg: '#F1EFE8', badgeColor: '#444',
+      what: 'User fills identity fields: bot name for internal reference, business name used in AI greetings, platform checkboxes (WhatsApp and/or Instagram), working hours range, and Live/Paused toggle. These do not affect AI quality but control scope.',
+      action: 'Fill all fields → Save Changes',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-robot', key: 'chatflow_bots[]', text: 'name, businessName, platform, status written'}],
+      screens: ['bots']
+    },
+    {
+      title: 'Tab 2 — Knowledge Base',
+      sub: 'Products, prices, delivery, payment, return policy, FAQs',
+      badge: 'Most important', badgeBg: '#FEE2E2', badgeColor: '#991B1B',
+      what: 'Every field here becomes part of the Claude system prompt. Empty fields mean generic unhelpful answers. Full fields mean accurate business-specific replies. The system prompt says: You are a bot for [businessName]. Products: [products]. Prices: [priceRange]. Delivery: [delivery]. Payment: [payment]. Returns: [returnPolicy].',
+      action: 'Fill all textareas completely → Save Knowledge Base',
+      decisionQ: 'Is the Knowledge Base complete?',
+      decisionYes: 'Bot will give accurate, specific replies to customers',
+      decisionNo: 'Bot will give vague generic answers — always fill before testing',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-robot', key: 'chatflow_bots[].products', text: 'Injected into Claude system prompt'},
+        {icon: 'ti-robot', key: 'chatflow_bots[].delivery', text: 'Injected into Claude system prompt'},
+        {icon: 'ti-robot', key: 'chatflow_bots[].priceRange', text: 'Injected into Claude system prompt'}
+      ],
+      screens: ['bots']
+    },
+    {
+      title: 'Tab 3 — Assign Templates',
+      sub: 'Link existing reply templates to guide AI responses',
+      badge: 'Recommended', badgeBg: '#FEF3C7', badgeColor: '#92400E',
+      what: 'Templates are trigger-reply pairs that get appended to the system prompt. Assigning them tells Claude: if customer asks about [triggers], reply following this pattern: [reply]. This dramatically increases accuracy for common questions.',
+      action: 'Check templates to assign → they appear in bot system prompt immediately',
+      decisionQ: 'Are templates already created?',
+      decisionYes: 'Select and assign them to this bot now',
+      decisionNo: 'Go to Templates screen first, create them, then return here',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-robot', key: 'chatflow_bots[].templateIds', text: 'Array of template UUIDs assigned'}],
+      screens: ['bots', 'templates']
+    },
+    {
+      title: 'Tab 4 — Test Bot (live chat)',
+      sub: 'Real Claude API calls with this bot configuration',
+      badge: 'Validation', badgeBg: '#D4F0EB', badgeColor: '#0F5045',
+      what: 'Live chat interface that uses the actual Claude API with this exact bot system prompt. User tests realistic customer messages. Language auto-detected. Token count shown per reply. Any message that returns wrong info means the Knowledge Base needs updating.',
+      action: 'Test: price question, availability, delivery, then type cancel to test escalation',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [
+        'Detect language from message (Arabic unicode regex)',
+        'Load bot config from chatflow_bots by botId',
+        'Load assigned templates from chatflow_templates',
+        'Build system prompt: persona + KB + templates + escalation rule',
+        'POST to Claude API with last 10 messages as history',
+        'Scan reply for [ESCALATE] flag before displaying',
+        'Write interaction to chatflow_analytics'
+      ],
+      dataItems: [],
+      screens: ['bots']
+    },
+    {
+      title: 'Run Auto Test Suite',
+      sub: '5 scenarios fired automatically — pass/fail table shown',
+      badge: 'QA gate', badgeBg: '#D1FAE5', badgeColor: '#065F46',
+      what: 'One click fires 5 real Claude API calls: Arabic price inquiry, English availability, delivery question, cancel order (escalation), payment methods. Results table shows pass/fail per scenario and whether escalation was correctly triggered on the cancel test.',
+      action: 'Click Run All 5 Scenarios → review results → fix KB if any fail',
+      decisionQ: 'All 5 scenarios pass?',
+      decisionYes: 'Bot ready — set Status to Live',
+      decisionNo: 'Fix Knowledge Base or Templates → re-run suite until all pass',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['bots']
+    }
+  ],
+
+  // FLOW 2 — Customer sends a message
+  [
+    {
+      title: 'Customer sends a message',
+      sub: 'Via WhatsApp, Instagram, or the test interface',
+      badge: 'Trigger', badgeBg: '#F1EFE8', badgeColor: '#444',
+      what: 'In the prototype this is the Conversations screen input. In production this arrives via a WhatsApp Business API webhook or Instagram Messaging API webhook. The raw message text is the only input required to start the AI pipeline.',
+      action: 'Customer types and sends any message',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['conversations']
+    },
+    {
+      title: 'Language detection',
+      sub: 'Arabic Unicode regex runs in under 1ms',
+      badge: 'Automatic', badgeBg: '#D4F0EB', badgeColor: '#0F5045',
+      what: 'A single regex test checks if the message contains Arabic Unicode characters (U+0600 to U+06FF range). True = Arabic, bot replies in Arabic. False = English, bot replies in English. No user configuration needed — it is fully automatic.',
+      action: 'Language flag set (ar or en) for this message',
+      decisionQ: 'Does message contain Arabic characters?',
+      decisionYes: 'Language = Arabic — Claude instructed to reply in Arabic',
+      decisionNo: 'Language = English — Claude instructed to reply in English',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-flag', key: 'analyticsLog.language', text: 'ar or en stored in interaction log'}],
+      screens: []
+    },
+    {
+      title: 'System prompt assembled',
+      sub: 'Bot KB + templates + conversation history combined',
+      badge: 'AI prep', badgeBg: '#D0D8E8', badgeColor: '#1B2A4A',
+      what: 'Five components assembled into the system prompt sent to Claude: (1) Bot persona with language rule, (2) Full knowledge base — products, prices, delivery, payment, returns, (3) All assigned template patterns, (4) Escalation rule — append ESCALATE flag on cancel/complaint/refund, (5) Last 10 messages as conversation context.',
+      action: 'System prompt built — ready for API call',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-robot', key: 'chatflow_bots[]', text: 'Knowledge base loaded'},
+        {icon: 'ti-file-text', key: 'chatflow_templates[]', text: 'Assigned templates loaded'},
+        {icon: 'ti-messages', key: 'chatflow_conversations[]', text: 'Last 10 messages loaded as history'}
+      ],
+      screens: []
+    },
+    {
+      title: 'Claude API call',
+      sub: 'POST to /v1/messages — claude-sonnet-4-20250514',
+      badge: 'API call', badgeBg: '#FEE2E2', badgeColor: '#991B1B',
+      what: 'HTTP POST to the Anthropic API using the user stored API key from localStorage. Model: claude-sonnet-4-20250514. Max tokens: 300 (keeps replies short for chat). The header anthropic-dangerous-direct-browser-access is required for browser-side calls.',
+      action: 'Fetch call sent — typing indicator shown to user',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [
+        'POST https://api.anthropic.com/v1/messages',
+        'x-api-key: [chatflow_api_key from localStorage]',
+        'anthropic-version: 2023-06-01',
+        'anthropic-dangerous-direct-browser-access: true',
+        'Body: model + max_tokens:300 + system + messages array',
+        'Response: content[0].text + usage.output_tokens'
+      ],
+      dataItems: [],
+      screens: []
+    },
+    {
+      title: 'Escalation check',
+      sub: 'Scan reply for ESCALATE flag before showing customer',
+      badge: 'Decision point', badgeBg: '#FEF3C7', badgeColor: '#92400E',
+      what: 'Claude appends an ESCALATE marker (not visible to customer) when it detects: order cancellation intent, refund request, formal complaint, or a question it cannot answer confidently. The marker is stripped before the reply is displayed. The customer only sees the empathetic handoff message.',
+      action: 'Check reply text for ESCALATE marker',
+      decisionQ: 'Does reply contain ESCALATE flag?',
+      decisionYes: 'Strip flag, display reply, set status=escalated, switch to Human Mode, show red banner',
+      decisionNo: 'Display reply normally, status stays replied, bot remains active',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['conversations']
+    },
+    {
+      title: 'Reply shown and analytics logged',
+      sub: 'Teal bubble appears — interaction written to localStorage',
+      badge: 'Complete', badgeBg: '#D1FAE5', badgeColor: '#065F46',
+      what: 'Bot reply appears as a teal bubble with the ChatFlow Bot label and timestamp. Simultaneously an analytics object is pushed to the chatflow_analytics array capturing: response time, tokens used, language detected, whether escalated, and which template triggered if any. This feeds the Analytics screen in real time.',
+      action: 'Customer sees reply — analytics log written automatically',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-chart-bar', key: 'chatflow_analytics', text: 'Push: id, timestamp, botId, language, responseTimeMs, tokensUsed, escalated, templateTriggered'},
+        {icon: 'ti-messages', key: 'chatflow_conversations[]', text: 'Append message to conversation history array'}
+      ],
+      screens: ['conversations', 'analytics']
+    }
+  ],
+
+  // FLOW 3 — Escalation flow
+  [
+    {
+      title: 'Escalation trigger detected',
+      sub: 'Customer says: cancel, refund, complaint, or bot is unsure',
+      badge: 'Trigger', badgeBg: '#FEE2E2', badgeColor: '#991B1B',
+      what: 'Claude system prompt instructs it to detect four escalation intents: order cancellation, refund request, formal complaint, or a question outside the knowledge base. When any of these occur Claude appends an ESCALATE marker to the end of its reply on a new line — invisible to the customer.',
+      action: 'Example: customer types "I want to cancel my order"',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['conversations']
+    },
+    {
+      title: 'Bot sends empathetic handoff message',
+      sub: 'Reassuring reply before switching to human mode',
+      badge: 'Handoff', badgeBg: '#FEF3C7', badgeColor: '#92400E',
+      what: 'Before stopping, the bot always sends a reassuring final message to the customer such as: "I understand — connecting you with our team now. Someone will respond within 5 minutes." The customer never experiences an abrupt stop. The ESCALATE flag is stripped from the displayed text.',
+      action: 'Handoff message displayed in teal bubble — customer receives it normally',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-messages', key: 'conversation.status', text: 'Updated from replied to escalated'}],
+      screens: ['conversations']
+    },
+    {
+      title: 'Human mode activates automatically',
+      sub: 'Red banner appears — bot stops auto-replying',
+      badge: 'Mode switch', badgeBg: '#FEE2E2', badgeColor: '#991B1B',
+      what: 'Three things happen simultaneously: conversation status changes to escalated, the green bot banner is replaced by a red escalation banner, and the auto-reply loop stops completely. No more automatic responses until the owner manually returns control to the bot.',
+      action: 'Red banner visible — owner alerted — input field now accepts owner typing',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-messages', key: 'conversation.status', text: 'escalated'},
+        {icon: 'ti-bell', key: 'notifications array', text: 'New alert: customer name + reason added'}
+      ],
+      screens: ['conversations']
+    },
+    {
+      title: 'Notification fires to owner',
+      sub: 'Bell badge increments — notification dropdown entry added',
+      badge: 'Alert', badgeBg: '#FEF3C7', badgeColor: '#92400E',
+      what: 'The notification bell badge count increases. A new entry appears in the notification dropdown with the customer name and escalation reason. In a production app this would also send a push notification to the owner mobile. The owner is alerted even if not currently viewing the Conversations screen.',
+      action: 'Owner sees red badge — clicks bell — reads alert — clicks to open conversation',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [],
+      screens: []
+    },
+    {
+      title: 'Owner reads context and replies',
+      sub: 'Full AI conversation history visible — owner types as human',
+      badge: 'Human mode', badgeBg: '#D0D8E8', badgeColor: '#1B2A4A',
+      what: 'Owner sees the complete conversation — all AI messages and customer messages are visible. Owner types a reply which appears as a dark navy bubble with a You label — visually distinct from both customer (gray) and bot (teal) messages. Full context always available.',
+      action: 'Owner resolves the issue in human mode',
+      decisionQ: 'Is the issue resolved?',
+      decisionYes: 'Click Return to Bot — AI resumes handling future messages',
+      decisionNo: 'Continue in human mode until resolved — mark closed when done',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['conversations']
+    },
+    {
+      title: 'Conversation resolved and logged',
+      sub: 'Return to bot or close conversation — escalation counted in analytics',
+      badge: 'End state', badgeBg: '#D1FAE5', badgeColor: '#065F46',
+      what: 'Two possible endings: (1) Owner clicks Return to Bot — humanMode becomes false, bot auto-resumes for any future messages. (2) Owner marks conversation closed — removed from active list. Either way the escalation is recorded in the analytics log and counted in the escalation rate metric on the Analytics screen.',
+      action: 'Conversation closed or returned to bot',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-chart-bar', key: 'chatflow_analytics[].escalated', text: 'true — counted in resolution rate calculation'}],
+      screens: ['conversations', 'analytics']
+    }
+  ],
+
+  // FLOW 4 — Daily returning user
+  [
+    {
+      title: 'Open Dashboard — morning snapshot',
+      sub: 'Overnight messages, active bots, any red dots to handle',
+      badge: 'Morning check', badgeBg: '#FDF0CD', badgeColor: '#7A5A00',
+      what: 'Dashboard KPIs recalculate from localStorage analytics on every load. Owner sees at a glance: how many messages arrived overnight, current response rate, how many bots are live, and estimated sales saved this month. The Recent Conversations widget shows red dots for any escalations that need attention first.',
+      action: 'Scan KPIs — check for red escalation dots in Recent Conversations',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-chart-bar', key: 'chatflow_analytics', text: 'Read — KPIs recalculated on load'}],
+      screens: ['dashboard']
+    },
+    {
+      title: 'Check escalated conversations',
+      sub: 'Filter to Escalated tab — handle priority items first',
+      badge: 'Priority', badgeBg: '#FEE2E2', badgeColor: '#991B1B',
+      what: 'Click Conversations in sidebar, then the Escalated filter tab. Shows only conversations needing human attention. For each one: read the full AI conversation context, understand what the customer needs, type a human reply, resolve the issue, and click Return to Bot or close.',
+      action: 'For each escalation: read context, reply, resolve, return to bot',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['conversations']
+    },
+    {
+      title: 'Check pending conversations',
+      sub: 'Messages bot has not replied to yet — e.g. outside working hours',
+      badge: 'Review', badgeBg: '#FEF3C7', badgeColor: '#92400E',
+      what: 'Pending conversations are those where a customer message exists but the bot has not responded — typically messages received outside configured working hours, or when the bot was paused. Owner can trigger the bot manually or reply as a human.',
+      action: 'Review pending tab — decide to trigger bot or reply manually',
+      decisionQ: 'Should bot handle or owner handle?',
+      decisionYes: 'Trigger bot manually — bot replies using current KB',
+      decisionNo: 'Switch to human mode — owner types reply directly',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['conversations']
+    },
+    {
+      title: 'Review Analytics screen',
+      sub: 'Resolution rate, top triggers, API cost, response time',
+      badge: 'Metrics', badgeBg: '#D4F0EB', badgeColor: '#0F5045',
+      what: 'Weekly review of key metrics. The critical number is the bot resolution rate — should stay above 90%. If lower, look at which trigger categories have the most escalations. Low rate on price queries means the Knowledge Base price range is unclear. Low rate on delivery means customers ask something the bot does not know.',
+      action: 'Check resolution rate — identify any failing categories',
+      decisionQ: 'Is resolution rate below 90%?',
+      decisionYes: 'Identify failing category — update Knowledge Base or add Template',
+      decisionNo: 'Bot performing well — continue monitoring',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-chart-bar', key: 'chatflow_analytics', text: 'Read — all metrics aggregated from logs'}],
+      screens: ['analytics']
+    },
+    {
+      title: 'Update Knowledge Base or Templates',
+      sub: 'Add new products, update prices, create new templates',
+      badge: 'Optimization', badgeBg: '#D0D8E8', badgeColor: '#1B2A4A',
+      what: 'The most common daily improvement task. Prices change, new products arrive, customers ask recurring questions that need dedicated templates. Owner updates Bot KB fields or creates new templates. Changes take effect immediately on the very next Claude API call — no restart needed.',
+      action: 'Bot Builder, Knowledge Base tab, update fields, Save, then run Test Bot to verify',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-robot', key: 'chatflow_bots[]', text: 'Updated KB fields written to localStorage'},
+        {icon: 'ti-file-text', key: 'chatflow_templates', text: 'New templates added if created'}
+      ],
+      screens: ['bots', 'templates']
+    },
+    {
+      title: 'Export data backup (weekly habit)',
+      sub: 'Download all localStorage as JSON — insurance against data loss',
+      badge: 'Weekly', badgeBg: '#F1EFE8', badgeColor: '#444',
+      what: 'Since everything lives in localStorage, a browser cache clear or different browser = all data gone. Weekly export to JSON is a critical safety habit. Settings, Data Management, Export All Data downloads one JSON file with all bots, templates, conversations, and analytics. On a new device, Import Backup restores everything.',
+      action: 'Settings, Data Management, Export All Data, save the JSON file',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-download', key: 'ALL chatflow_* keys', text: 'Exported as single JSON object'}],
+      screens: ['settings']
+    }
+  ],
+
+  // FLOW 5 — Add and use a template
+  [
+    {
+      title: 'Navigate to Templates screen',
+      sub: 'See all existing templates with triggers and usage counts',
+      badge: 'Navigation', badgeBg: '#EEEDFE', badgeColor: '#3C3489',
+      what: 'Templates screen shows all templates from chatflow_templates as cards. Each card displays: template name, category badge, trigger keywords as chips, a preview of the reply message, language flags for Arabic and English coverage, and how many times the template has been triggered in conversations.',
+      action: 'Click Templates in sidebar',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-file-text', key: 'chatflow_templates', text: 'Read — all templates rendered as cards'}],
+      screens: ['templates']
+    },
+    {
+      title: 'Click Add Template',
+      sub: 'Modal opens with name, category, triggers, and reply fields',
+      badge: 'Create', badgeBg: '#D4F0EB', badgeColor: '#0F5045',
+      what: 'Template creation modal has: Template name for internal reference, Category dropdown (Sales, Delivery, Returns, General), Trigger keywords comma-separated (the words or phrases that activate this template), Reply in English textarea with variable inserter buttons, and Reply in Arabic textarea. Both language variants should be filled.',
+      action: 'Fill all fields — especially trigger keywords and both language replies',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-file-text', key: 'chatflow_templates', text: 'New template object pushed with UUID'}],
+      screens: ['templates']
+    },
+    {
+      title: 'Assign template to a bot',
+      sub: 'Bot Builder, Templates tab, check the new template',
+      badge: 'Link', badgeBg: '#D0D8E8', badgeColor: '#1B2A4A',
+      what: 'Templates are reusable across multiple bots. Go to Bot Builder, click Edit on the target bot, go to Tab 3 Templates. Checkbox list shows all templates. Checking one adds its ID to the bot templateIds array. Unchecking removes it. One template can be assigned to many different bots.',
+      action: 'Bot Builder, edit bot, Templates tab, check new template, Save',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [{icon: 'ti-robot', key: 'chatflow_bots[].templateIds', text: 'New template UUID added to array'}],
+      screens: ['bots']
+    },
+    {
+      title: 'Template injected into system prompt',
+      sub: 'Automatic — happens on every Claude API call for this bot',
+      badge: 'Automatic', badgeBg: '#D4F0EB', badgeColor: '#0F5045',
+      what: 'When any message arrives for this bot, aiService.js loads the bot config, loops through templateIds, fetches each template from chatflow_templates, and appends a REPLY TEMPLATES section to the system prompt. Claude reads these as strong guidance for how to respond to semantically matching queries.',
+      action: 'Nothing needed — injection happens automatically on every call',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [
+        'Load bot object from chatflow_bots by botId',
+        'Loop through bot.templateIds array',
+        'Fetch each template from chatflow_templates',
+        'Build template section: If asked about [triggers] reply: [template reply]',
+        'Append template section to full system prompt',
+        'Send assembled prompt to Claude API'
+      ],
+      dataItems: [],
+      screens: []
+    },
+    {
+      title: 'Customer triggers the template',
+      sub: 'Message matches trigger semantics — Claude follows template pattern',
+      badge: 'Live use', badgeBg: '#D1FAE5', badgeColor: '#065F46',
+      what: 'Claude does not do exact keyword matching. It understands meaning. So a message saying "how much does the dress cost" matches a price template even if the trigger words were only: price, cost, سعر. The template reply becomes the strong basis for the Claude response, personalized with any specific product details mentioned.',
+      action: 'Customer sends related message — bot replies following template pattern',
+      decisionQ: 'Does customer message relate to a template?',
+      decisionYes: 'Claude follows template reply pattern closely — accurate specific answer',
+      decisionNo: 'Claude uses general KB knowledge and default personality',
+      apiSteps: [],
+      dataItems: [],
+      screens: ['conversations']
+    },
+    {
+      title: 'Analytics shows template performance',
+      sub: 'Template triggered field logged — appears in performance table',
+      badge: 'Tracked', badgeBg: '#D4F0EB', badgeColor: '#0F5045',
+      what: 'Each analytics log entry includes a templateTriggered field. The Analytics screen reads all logs and calculates per-template metrics: how many times triggered this week, what percentage of those conversations were resolved without escalation (the success rate), and displays in the Top Performing Templates table.',
+      action: 'Analytics screen, Top Performing Templates table shows new template data',
+      decisionQ: '', decisionYes: '', decisionNo: '',
+      apiSteps: [],
+      dataItems: [
+        {icon: 'ti-chart-bar', key: 'chatflow_analytics[].templateTriggered', text: 'Template name logged per interaction'},
+        {icon: 'ti-chart-bar', key: 'analytics table', text: 'Success rate calculated: resolved without escalation / total triggered'}
+      ],
+      screens: ['analytics']
+    }
+  ]
+];
+
+function renderFlowCards() {
+  var cardsEl = document.getElementById('uf-flow-cards');
+  var viewerEl = document.getElementById('uf-viewer');
+  if (!cardsEl) return;
+
+  // Cards always visible — viewer only shown when a flow is selected
+  cardsEl.style.display = 'grid';
+  if (viewerEl) {
+    viewerEl.style.display = UF_CURRENT_FLOW >= 0 ? 'block' : 'none';
+  }
+
+  cardsEl.innerHTML = FLOW_CARDS.map(function(fc, i) {
+    var isActive = UF_CURRENT_FLOW === i;
+    return '<div class="uf-flow-card' + (isActive ? ' active-card' : '') + '" onclick="openFlow(' + i + ')">' +
+      '<div class="ufc-num">Flow ' + fc.num + ' of ' + FLOW_CARDS.length + '</div>' +
+      '<div class="ufc-icon" style="background:' + fc.iconBg + ';color:' + fc.iconColor + '">' +
+        '<i class="ti ' + fc.icon + '" aria-hidden="true"></i>' +
+      '</div>' +
+      '<div class="ufc-title">' + fc.title + '</div>' +
+      '<div class="ufc-desc">' + fc.desc + '</div>' +
+      '<div class="ufc-steps-count"><i class="ti ti-stairs" aria-hidden="true" style="font-size:12px;margin-right:4px"></i>' + fc.stepCount + ' steps</div>' +
+      '<div class="ufc-bar" style="background:' + fc.barColor + '"></div>' +
+    '</div>';
+  }).join('');
+}
+
+function openFlow(idx) {
+  UF_CURRENT_FLOW = idx;
+  UF_CURRENT_STEP = 0;
+  renderFlowCards();
+  renderViewer();
+  var viewerEl = document.getElementById('uf-viewer');
+  if (viewerEl) {
+    viewerEl.style.display = 'block';
+    setTimeout(function() { viewerEl.scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100);
+  }
+}
+
+function renderViewer() {
+  var fc = FLOW_CARDS[UF_CURRENT_FLOW];
+  var steps = FLOW_STEPS[UF_CURRENT_FLOW];
+  var step = steps[UF_CURRENT_STEP];
+  if (!fc || !steps || !step) return;
+
+  // Header
+  var headerEl = document.getElementById('uf-viewer-header');
+  if (headerEl) {
+    headerEl.innerHTML =
+      '<div class="uf-vh-icon" style="background:' + fc.iconBg + ';color:' + fc.iconColor + '">' +
+        '<i class="ti ' + fc.icon + '" aria-hidden="true"></i>' +
+      '</div>' +
+      '<div>' +
+        '<div class="uf-vh-title">' + fc.title + '</div>' +
+        '<div class="uf-vh-sub">' + fc.desc + '</div>' +
+      '</div>';
+  }
+
+  // Steps column
+  var stepsEl = document.getElementById('uf-steps-col');
+  if (stepsEl) {
+    stepsEl.innerHTML = steps.map(function(s, i) {
+      var isDone = i < UF_CURRENT_STEP;
+      var isCur = i === UF_CURRENT_STEP;
+      var numBg = isDone ? '#1A7A6E' : isCur ? '#1B2A4A' : '#E2E8F0';
+      var numColor = (isDone || isCur) ? '#fff' : '#94A3B8';
+      var lineBg = isDone ? '#1A7A6E' : '#E2E8F0';
+      var numContent = isDone ? '<i class="ti ti-check" style="font-size:10px" aria-hidden="true"></i>' : (i + 1);
+      var hasLine = i < steps.length - 1;
+      return '<div class="uf-step-item' + (isCur ? ' active' : '') + '" onclick="goToStep(' + i + ')">' +
+        '<div class="uf-si-left">' +
+          '<div class="uf-si-num" style="background:' + numBg + ';color:' + numColor + '">' + numContent + '</div>' +
+          (hasLine ? '<div class="uf-si-line" style="background:' + lineBg + '"></div>' : '') +
+        '</div>' +
+        '<div class="uf-si-body">' +
+          '<div class="uf-si-title" style="color:' + (isCur ? '#1B2A4A' : '#64748B') + '">' + s.title + '</div>' +
+          '<div class="uf-si-sub">' + s.sub + '</div>' +
+          '<span class="uf-si-badge" style="background:' + s.badgeBg + ';color:' + s.badgeColor + '">' + s.badge + '</span>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // Detail column
+  var detailEl = document.getElementById('uf-detail-col');
+  if (detailEl) {
+    var html = '';
+    html += '<button class="uf-back-btn" onclick="closeViewer()">' +
+      '<i class="ti ti-arrow-left" aria-hidden="true"></i> All flows' +
+    '</button>';
+    html += '<div class="uf-d-step-label">Step ' + (UF_CURRENT_STEP + 1) + ' of ' + steps.length + '</div>';
+    html += '<div class="uf-d-title">' + step.title + '</div>';
+    html += '<div class="uf-d-what">' + step.what + '</div>';
+
+    if (step.action) {
+      html += '<div class="uf-d-section">' +
+        '<div class="uf-d-section-title"><i class="ti ti-player-play" aria-hidden="true"></i> User action</div>' +
+        '<div class="uf-action-box"><i class="ti ti-arrow-right" style="font-size:14px;flex-shrink:0;margin-top:1px" aria-hidden="true"></i><span>' + step.action + '</span></div>' +
+      '</div>';
+    }
+
+    if (step.decisionQ) {
+      html += '<div class="uf-d-section">' +
+        '<div class="uf-d-section-title"><i class="ti ti-git-branch" aria-hidden="true"></i> Decision point</div>' +
+        '<div class="uf-decision-box">' +
+          '<div class="uf-decision-q">' + step.decisionQ + '</div>' +
+          '<div class="uf-branches">' +
+            '<div class="uf-branch yes"><div class="uf-branch-lbl">YES</div>' + step.decisionYes + '</div>' +
+            '<div class="uf-branch no"><div class="uf-branch-lbl">NO</div>' + step.decisionNo + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    if (step.apiSteps && step.apiSteps.length > 0) {
+      html += '<div class="uf-d-section">' +
+        '<div class="uf-d-section-title"><i class="ti ti-api" aria-hidden="true"></i> Processing steps</div>' +
+        '<div class="uf-api-list">' +
+        step.apiSteps.map(function(s, i) {
+          return '<div class="uf-api-item"><div class="uf-api-n">' + (i + 1) + '</div><span>' + s + '</span></div>';
+        }).join('') +
+        '</div>' +
+      '</div>';
+    }
+
+    if (step.dataItems && step.dataItems.length > 0) {
+      html += '<div class="uf-d-section">' +
+        '<div class="uf-d-section-title"><i class="ti ti-database" aria-hidden="true"></i> Data read / written</div>' +
+        '<div class="uf-data-list">' +
+        step.dataItems.map(function(d) {
+          return '<div class="uf-data-item">' +
+            '<i class="ti ' + d.icon + ' uf-data-icon" aria-hidden="true"></i>' +
+            '<span class="uf-data-key">' + d.key + '</span>' +
+            '<span style="font-size:12px;color:var(--muted)">' + d.text + '</span>' +
+          '</div>';
+        }).join('') +
+        '</div>' +
+      '</div>';
+    }
+
+    if (step.screens && step.screens.length > 0) {
+      html += '<div class="uf-d-section">' +
+        '<div class="uf-d-section-title"><i class="ti ti-device-desktop" aria-hidden="true"></i> Try it in the prototype</div>' +
+        '<div class="uf-screen-btns">' +
+        step.screens.map(function(sc) {
+          var lbl = SCREEN_LABELS[sc] || sc;
+          return '<button class="uf-screen-btn" onclick="jumpToScreen(\'' + sc + '\')">' +
+            '<i class="ti ti-external-link" style="font-size:10px" aria-hidden="true"></i> ' + lbl +
+          '</button>';
+        }).join('') +
+        '</div>' +
+      '</div>';
+    }
+
+    detailEl.innerHTML = html;
+  }
+
+  // Footer
+  var footerEl = document.getElementById('uf-viewer-footer');
+  if (footerEl) {
+    var dots = steps.map(function(_, i) {
+      var cl = i < UF_CURRENT_STEP ? 'var(--navy)' : i === UF_CURRENT_STEP ? 'var(--teal)' : 'var(--border)';
+      return '<div class="uf-dot" style="background:' + cl + '" onclick="goToStep(' + i + ')"></div>';
+    }).join('');
+
+    var isLast = UF_CURRENT_STEP === steps.length - 1;
+    var nextFlowIdx = (UF_CURRENT_FLOW + 1) % FLOW_CARDS.length;
+
+    footerEl.innerHTML =
+      '<button class="uf-nav-btn" onclick="goToStep(' + (UF_CURRENT_STEP - 1) + ')" ' + (UF_CURRENT_STEP === 0 ? 'disabled' : '') + '>' +
+        '<i class="ti ti-arrow-left" aria-hidden="true"></i> Previous' +
+      '</button>' +
+      '<div class="uf-progress-dots">' + dots + '</div>' +
+      (isLast
+        ? '<button class="uf-nav-btn primary" onclick="openFlow(' + nextFlowIdx + ')">' +
+            'Next flow <i class="ti ti-arrow-right" aria-hidden="true"></i>' +
+          '</button>'
+        : '<button class="uf-nav-btn primary" onclick="goToStep(' + (UF_CURRENT_STEP + 1) + ')">' +
+            'Next step <i class="ti ti-arrow-right" aria-hidden="true"></i>' +
+          '</button>'
+      );
+  }
+}
+
+function goToStep(idx) {
+  var steps = FLOW_STEPS[UF_CURRENT_FLOW];
+  if (!steps || idx < 0 || idx >= steps.length) return;
+  UF_CURRENT_STEP = idx;
+  renderViewer();
+}
+
+function closeViewer() {
+  UF_CURRENT_FLOW = -1;
+  UF_CURRENT_STEP = 0;
+  renderFlowCards();
+  document.getElementById('uf-viewer').style.display = 'none';
+}
+
+function jumpToScreen(sc) {
+  showSection('prototype', null);
+  var tabBtn = document.getElementById('tab-prototype');
+  if (tabBtn) tabBtn.classList.add('active');
+  if (typeof gp === 'function') gp(sc);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Auto-init user flow cards when the module loads
+(function() {
+  var tryInit = function() {
+    var el = document.getElementById('uf-flow-cards');
+    if (el && typeof FLOW_CARDS !== 'undefined') {
+      renderFlowCards();
+    }
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryInit);
+  } else {
+    tryInit();
+  }
+})();
+
+
+
+</script>
+</body>
+</html>
