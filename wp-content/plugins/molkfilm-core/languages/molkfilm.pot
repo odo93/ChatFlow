@@ -1,0 +1,121 @@
+# Translation template for Molk Film Core plugin.
+# Copyright (C) 2024 Molk Film
+# This file is distributed under the GPL-2.0-or-later license.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Molk Film Core 1.0.0\n"
+"Report-Msgid-Bugs-To: https://molkfilm.com\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "ملك فيلم"
+msgstr ""
+
+msgid "الدورات"
+msgstr ""
+
+msgid "سجّل الآن"
+msgstr ""
+
+msgid "المقاعد ممتلئة"
+msgstr ""
+
+msgid "عذراً، لقد امتلأت مقاعد هذه الدورة."
+msgstr ""
+
+msgid "أونلاين"
+msgstr ""
+
+msgid "وجاهي"
+msgstr ""
+
+msgid "هجين"
+msgstr ""
+
+msgid "%d جلسة"
+msgstr ""
+
+msgid "طريقة التدريس"
+msgstr ""
+
+msgid "إجمالي المقاعد"
+msgstr ""
+
+msgid "المقاعد المحجوزة (تلقائي)"
+msgstr ""
+
+msgid "عدد الجلسات"
+msgstr ""
+
+msgid "مدة الجلسة (دقيقة)"
+msgstr ""
+
+msgid "إجمالي الساعات (نص)"
+msgstr ""
+
+msgid "تاريخ البدء"
+msgstr ""
+
+msgid "جدول المواعيد"
+msgstr ""
+
+msgid "الموقع (وجاهي)"
+msgstr ""
+
+msgid "رابط الجلسة الأونلاين"
+msgstr ""
+
+msgid "اسم المدرب"
+msgstr ""
+
+msgid "تفاصيل الدورة — ملك فيلم"
+msgstr ""
+
+msgid "نظرة عامة"
+msgstr ""
+
+msgid "إجمالي الإيرادات"
+msgstr ""
+
+msgid "إجمالي التسجيلات"
+msgstr ""
+
+msgid "الدورات النشطة"
+msgstr ""
+
+msgid "الطلاب"
+msgstr ""
+
+msgid "الإعدادات"
+msgstr ""
+
+msgid "تم حفظ الإعدادات بنجاح."
+msgstr ""
+
+msgid "بوابة Paymob غير مُهيّأة. تواصل مع الدعم."
+msgstr ""
+
+msgid "بوابة PayTabs غير مُهيّأة. تواصل مع الدعم."
+msgstr ""
+
+msgid "خطأ في معالجة الدفع: "
+msgstr ""
+
+msgid "في انتظار دفع Paymob"
+msgstr ""
+
+msgid "في انتظار دفع PayTabs"
+msgstr ""
+
+msgid "بدأ البرنامج"
+msgstr ""
