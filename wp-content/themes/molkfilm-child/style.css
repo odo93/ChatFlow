@@ -1,0 +1,102 @@
+/*
+ * Theme Name:  Molk Film Child
+ * Theme URI:   https://molkfilm.com
+ * Description: Child theme for Molk Film (ملك فيلم) Arabic-first film academy — child of Astra.
+ * Author:      Molk Film
+ * Author URI:  https://molkfilm.com
+ * Template:    astra
+ * Version:     1.0.0
+ * Text Domain: molkfilm
+ * Domain Path: /languages
+ * Tags:        rtl-language-support, education, e-learning
+ */
+
+/* ====================================================
+   Brand colour palette — also defined as CSS variables
+   in assets/css/brand.css (canonical source).
+   Keep in sync if values ever change.
+   ==================================================== */
+:root {
+    --brand-green:       #155541;
+    --brand-green-dark:  #184133;
+    --brand-green-light: #145D46;
+    --brand-yellow:      #FFD844;
+    --white:             #FFFFFF;
+    --text-dark:         #1A2E26;
+    --muted:             #8FB3A6;
+
+    --font-arabic: 'Tajawal', 'Cairo', sans-serif;
+    --font-latin:  'Poppins', sans-serif;
+    --radius:      8px;
+    --transition:  0.25s ease;
+}
+
+/* ── Base typography ─────────────────────────────── */
+body {
+    font-family: var(--font-arabic);
+    color: var(--text-dark);
+    background: var(--white);
+    direction: rtl;
+    text-align: right;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-arabic);
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+a {
+    color: var(--brand-green);
+    transition: color var(--transition);
+}
+a:hover { color: var(--brand-green-dark); }
+
+/* ── Primary button ──────────────────────────────── */
+.btn-primary,
+.woocommerce #respond input#submit,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button {
+    background: var(--brand-yellow) !important;
+    color: var(--brand-green-dark) !important;
+    border: none !important;
+    border-radius: var(--radius) !important;
+    font-weight: 700 !important;
+    padding: 12px 28px !important;
+    transition: opacity var(--transition) !important;
+}
+.btn-primary:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover { opacity: 0.88 !important; }
+
+/* ── Badge / pill ────────────────────────────────── */
+.badge-pill {
+    display: inline-block;
+    background: var(--brand-yellow);
+    color: var(--brand-green-dark);
+    font-weight: 700;
+    padding: 4px 16px;
+    border-radius: 999px;
+    font-size: 0.875rem;
+}
+
+/* ── Site header ─────────────────────────────────── */
+.site-header,
+.ast-site-header-wrap {
+    background: var(--brand-green) !important;
+}
+.site-header a,
+.ast-site-header-wrap a { color: var(--white) !important; }
+
+/* ── Site footer ─────────────────────────────────── */
+.site-footer,
+.footer-widget-area {
+    background: var(--brand-green-dark) !important;
+    color: var(--white) !important;
+}
+
+/* ── Utility ─────────────────────────────────────── */
+.text-yellow  { color: var(--brand-yellow); }
+.bg-green     { background: var(--brand-green); color: var(--white); }
+.bg-green-dark{ background: var(--brand-green-dark); color: var(--white); }
