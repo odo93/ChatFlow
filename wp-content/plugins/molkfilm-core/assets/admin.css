@@ -1,0 +1,284 @@
+/*
+ * Molk Film Admin — admin.css
+ * Styles the custom wp-admin area with the brand palette.
+ * Applied only to pages under "ملك فيلم" top-level menu.
+ */
+
+/* ── Variables ───────────────────────────────────── */
+:root {
+    --adm-green:  #155541;
+    --adm-dark:   #184133;
+    --adm-yellow: #FFD844;
+    --adm-white:  #FFFFFF;
+    --adm-muted:  #8FB3A6;
+    --adm-bg:     #F4F7F5;
+    --adm-border: rgba(21,85,65,.14);
+    --adm-radius: 8px;
+    --adm-shadow: 0 2px 12px rgba(21,85,65,.10);
+}
+
+/* ── Page wrapper ────────────────────────────────── */
+.mf-admin-wrap {
+    font-family: 'Tajawal', 'Cairo', sans-serif;
+    direction: rtl;
+    text-align: right;
+    background: var(--adm-bg);
+    min-height: 100vh;
+    padding: 0;
+}
+
+/* ── Sidebar ─────────────────────────────────────── */
+.mf-admin-sidebar {
+    position: fixed;
+    top: 32px; /* WP admin bar height */
+    right: 0;
+    width: 240px;
+    height: calc(100vh - 32px);
+    background: var(--adm-green);
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: -4px 0 24px rgba(0,0,0,.15);
+    display: flex;
+    flex-direction: column;
+}
+.mf-admin-sidebar__logo {
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.mf-admin-sidebar__logo h2 {
+    color: var(--adm-yellow);
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+.mf-admin-sidebar__logo p {
+    color: rgba(255,255,255,.6);
+    margin: 4px 0 0;
+    font-size: .78rem;
+}
+.mf-admin-nav { list-style: none; margin: 16px 0; padding: 0; }
+.mf-admin-nav li { }
+.mf-admin-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 20px;
+    color: rgba(255,255,255,.80);
+    text-decoration: none;
+    font-size: .92rem;
+    font-weight: 600;
+    transition: background .2s, color .2s;
+    border-right: 3px solid transparent;
+}
+.mf-admin-nav a:hover,
+.mf-admin-nav a.is-active {
+    background: rgba(255,255,255,.08);
+    color: var(--adm-white);
+    border-right-color: var(--adm-yellow);
+}
+.mf-admin-nav a.is-active { color: var(--adm-yellow); }
+.mf-admin-nav__icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* ── Content area ────────────────────────────────── */
+.mf-admin-content {
+    margin-right: 240px;
+    padding: 32px;
+    min-height: calc(100vh - 32px);
+}
+.mf-admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    direction: rtl;
+}
+.mf-admin-header h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--adm-dark);
+    margin: 0;
+}
+
+/* ── Stat cards ──────────────────────────────────── */
+.mf-stat-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+.mf-stat-card {
+    background: var(--adm-white);
+    border-radius: var(--adm-radius);
+    box-shadow: var(--adm-shadow);
+    padding: 24px;
+    border-right: 4px solid var(--adm-green);
+    direction: rtl;
+}
+.mf-stat-card__label {
+    font-size: .82rem;
+    color: var(--adm-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 8px;
+}
+.mf-stat-card__value {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--adm-dark);
+    line-height: 1;
+}
+.mf-stat-card__sub {
+    font-size: .78rem;
+    color: var(--adm-muted);
+    margin-top: 6px;
+}
+.mf-stat-card--yellow { border-right-color: var(--adm-yellow); }
+.mf-stat-card--yellow .mf-stat-card__value { color: var(--adm-dark); }
+
+/* ── Section card ────────────────────────────────── */
+.mf-admin-card {
+    background: var(--adm-white);
+    border-radius: var(--adm-radius);
+    box-shadow: var(--adm-shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+}
+.mf-admin-card__head {
+    background: var(--adm-green);
+    color: var(--adm-yellow);
+    padding: 14px 20px;
+    font-weight: 800;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.mf-admin-card__body { padding: 20px; }
+
+/* ── Data table ──────────────────────────────────── */
+.mf-admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    direction: rtl;
+    font-size: .88rem;
+}
+.mf-admin-table th {
+    background: var(--adm-bg);
+    padding: 10px 14px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--adm-dark);
+    border-bottom: 2px solid var(--adm-border);
+}
+.mf-admin-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--adm-border);
+    vertical-align: middle;
+}
+.mf-admin-table tr:hover td { background: rgba(21,85,65,.03); }
+.mf-admin-table .mf-status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 700;
+}
+.mf-status--paid      { background: #d4edda; color: #155724; }
+.mf-status--pending   { background: #fff3cd; color: #856404; }
+.mf-status--failed    { background: #f8d7da; color: #721c24; }
+.mf-status--cancelled { background: #e2e3e5; color: #383d41; }
+
+/* ── Settings form ───────────────────────────────── */
+.mf-settings-form { direction: rtl; }
+.mf-settings-form .mf-field {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--adm-border);
+}
+.mf-settings-form .mf-field:last-child { border: none; }
+.mf-settings-form label {
+    font-weight: 700;
+    font-size: .9rem;
+    padding-top: 8px;
+    color: var(--adm-dark);
+}
+.mf-settings-form input[type="text"],
+.mf-settings-form input[type="email"],
+.mf-settings-form input[type="url"],
+.mf-settings-form input[type="number"],
+.mf-settings-form input[type="password"],
+.mf-settings-form select,
+.mf-settings-form textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius);
+    font-size: .92rem;
+    font-family: inherit;
+    background: var(--adm-white);
+    transition: border-color .2s;
+    text-align: right;
+    direction: rtl;
+}
+.mf-settings-form input:focus,
+.mf-settings-form select:focus,
+.mf-settings-form textarea:focus {
+    border-color: var(--adm-green);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(21,85,65,.12);
+}
+.mf-settings-form .mf-field-note {
+    font-size: .78rem;
+    color: var(--adm-muted);
+    margin-top: 4px;
+}
+.mf-settings-section-head {
+    background: rgba(21,85,65,.06);
+    padding: 8px 0;
+    font-weight: 800;
+    color: var(--adm-green);
+    font-size: .85rem;
+    grid-column: 1 / -1;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+/* ── Buttons ─────────────────────────────────────── */
+.mf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    border-radius: var(--adm-radius);
+    font-weight: 700;
+    font-size: .9rem;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: opacity .2s;
+}
+.mf-btn:hover { opacity: .85; }
+.mf-btn--primary { background: var(--adm-yellow); color: var(--adm-dark); }
+.mf-btn--outline { background: transparent; border: 2px solid var(--adm-green); color: var(--adm-green); }
+
+/* ── Recent orders quick list ────────────────────── */
+.mf-order-row { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--adm-border); direction: rtl; font-size: .88rem; }
+.mf-order-row:last-child { border: none; }
+.mf-order-row__id { font-weight: 700; color: var(--adm-green); min-width: 60px; }
+.mf-order-row__name { flex: 1; }
+.mf-order-row__amount { font-weight: 800; }
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 960px) {
+    .mf-admin-sidebar { width: 200px; }
+    .mf-admin-content { margin-right: 200px; padding: 20px; }
+}
+@media (max-width: 600px) {
+    .mf-admin-sidebar { display: none; }
+    .mf-admin-content { margin-right: 0; }
+    .mf-settings-form .mf-field { grid-template-columns: 1fr; }
+}
