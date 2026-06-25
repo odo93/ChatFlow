@@ -365,6 +365,65 @@ class MolkFilm_Admin_Dashboard {
             [ 'key' => 'molkfilm_ga_id',           'label' => 'Google Analytics ID',         'type' => 'text', 'note' => 'مثال: G-XXXXXXXXXX', 'placeholder' => 'G-XXXXXXXXXX' ],
             [ 'key' => 'molkfilm_sitemap_enabled', 'label' => 'تفعيل خريطة الموقع (Sitemap)', 'type' => 'select', 'options' => [ '1' => 'نعم', '0' => 'لا' ] ],
         ], 'مدير SEO' );
+
+        // Per-course SEO editor ────────────────────────────────────────────────
+        // Handle inline save of per-course SEO fields
+        if ( isset( $_POST['mf_course_seo_save'] ) &&
+             check_admin_referer( 'molkfilm_course_seo', 'mf_course_seo_nonce' ) &&
+             current_user_can( 'manage_options' ) ) {
+            $cid  = absint( $_POST['mf_course_id'] ?? 0 );
+            $seo_title = sanitize_text_field( wp_unslash( $_POST['mf_seo_title'] ?? '' ) );
+            $seo_desc  = sanitize_textarea_field( wp_unslash( $_POST['mf_seo_description'] ?? '' ) );
+            if ( $cid ) {
+                update_post_meta( $cid, '_mf_seo_title',       $seo_title );
+                update_post_meta( $cid, '_mf_seo_description', $seo_desc );
+                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'تم حفظ SEO الدورة.', 'molkfilm' ) . '</p></div>';
+            }
+        }
+
+        $courses = get_posts( [ 'post_type' => 'courses', 'posts_per_page' => 100, 'post_status' => [ 'publish', 'draft' ] ] );
+        if ( $courses ) :
+        ?>
+        <div class="mf-admin-card" style="margin-top:28px;">
+            <div class="mf-admin-card__head">&#128269; <?php esc_html_e( 'SEO لكل دورة', 'molkfilm' ); ?></div>
+            <div class="mf-admin-card__body">
+                <p style="font-size:.85rem;color:var(--adm-muted);margin-top:0;"><?php esc_html_e( 'الحقول الفارغة تُورّث الإعدادات العامة أعلاه.', 'molkfilm' ); ?></p>
+                <?php foreach ( $courses as $c ) :
+                    $seo_title = get_post_meta( $c->ID, '_mf_seo_title', true );
+                    $seo_desc  = get_post_meta( $c->ID, '_mf_seo_description', true );
+                ?>
+                <details style="border-bottom:1px solid var(--adm-border);padding:12px 0;">
+                    <summary style="cursor:pointer;font-weight:700;color:var(--adm-dark);">
+                        <?php echo esc_html( $c->post_title ); ?>
+                        <?php if ( $seo_title || $seo_desc ) echo ' <small style="color:var(--adm-green);">✓ مُخصَّص</small>'; ?>
+                    </summary>
+                    <form method="post" style="padding:16px 0 4px;direction:rtl;">
+                        <?php wp_nonce_field( 'molkfilm_course_seo', 'mf_course_seo_nonce' ); ?>
+                        <input type="hidden" name="mf_course_id" value="<?php echo esc_attr( $c->ID ); ?>">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                            <div>
+                                <label style="display:block;font-size:.82rem;font-weight:700;margin-bottom:4px;"><?php esc_html_e( 'عنوان SEO', 'molkfilm' ); ?></label>
+                                <input type="text" name="mf_seo_title" value="<?php echo esc_attr( $seo_title ); ?>"
+                                       style="width:100%;padding:7px 10px;border:1px solid var(--adm-border);border-radius:4px;direction:rtl;"
+                                       placeholder="<?php esc_attr_e( 'اتركه فارغاً للاستخدام الافتراضي', 'molkfilm' ); ?>">
+                            </div>
+                            <div>
+                                <label style="display:block;font-size:.82rem;font-weight:700;margin-bottom:4px;"><?php esc_html_e( 'وصف SEO', 'molkfilm' ); ?></label>
+                                <input type="text" name="mf_seo_description" value="<?php echo esc_attr( $seo_desc ); ?>"
+                                       style="width:100%;padding:7px 10px;border:1px solid var(--adm-border);border-radius:4px;direction:rtl;"
+                                       placeholder="<?php esc_attr_e( 'اتركه فارغاً للاستخدام الافتراضي', 'molkfilm' ); ?>">
+                            </div>
+                        </div>
+                        <button type="submit" name="mf_course_seo_save" value="1" class="mf-btn mf-btn--primary" style="padding:6px 16px;font-size:.82rem;">
+                            <?php esc_html_e( 'حفظ', 'molkfilm' ); ?>
+                        </button>
+                    </form>
+                </details>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif;
+
         self::wrap_close();
     }
 

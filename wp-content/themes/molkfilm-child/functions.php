@@ -280,3 +280,51 @@ function molkfilm_customizer( $wp_customize ) {
         'type'    => 'textarea',
     ] );
 }
+
+/* ── Security: noindex WC utility pages ─────────────────────────────── */
+add_action( 'wp_head', 'molkfilm_noindex_wc_pages', 1 );
+function molkfilm_noindex_wc_pages() {
+    if ( ! function_exists( 'is_cart' ) ) return;
+    if ( is_cart() || is_checkout() || is_account_page() ) {
+        echo '<meta name="robots" content="noindex, nofollow">' . "\n";
+    }
+}
+
+/* ── Security headers ────────────────────────────────────────────────── */
+add_action( 'send_headers', 'molkfilm_security_headers' );
+function molkfilm_security_headers() {
+    if ( is_admin() ) return;
+    header( 'X-Content-Type-Options: nosniff' );
+    header( 'X-Frame-Options: SAMEORIGIN' );
+    header( 'Referrer-Policy: strict-origin-when-cross-origin' );
+    header( 'Permissions-Policy: camera=(), microphone=(), geolocation=()' );
+}
+
+/* ── Disable XML-RPC (not needed for this site) ──────────────────────── */
+add_filter( 'xmlrpc_enabled', '__return_false' );
+
+/* ── Remove WP version from head (minor hardening) ──────────────────── */
+remove_action( 'wp_head', 'wp_generator' );
+
+/* ── Preconnect hints for Google Fonts ──────────────────────────────── */
+add_action( 'wp_head', 'molkfilm_preconnect_hints', 0 );
+function molkfilm_preconnect_hints() {
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+}
+
+/* ── Image lazy-loading default (WP 5.5+ is auto, but ensure it) ─────── */
+add_filter( 'wp_lazy_loading_enabled', '__return_true' );
+
+/* ── Add Open Graph / Twitter to front-page meta (backup if SEO plugin absent) */
+add_action( 'wp_head', 'molkfilm_frontpage_og', 3 );
+function molkfilm_frontpage_og() {
+    // class-seo.php handles all pages; this fires only if class-seo.php isn't loaded
+    if ( class_exists( 'MolkFilm_SEO' ) ) return;
+    if ( ! is_front_page() ) return;
+    $title = esc_attr( get_option( 'molkfilm_seo_title', get_bloginfo( 'name' ) ) );
+    $desc  = esc_attr( get_option( 'molkfilm_seo_description', '' ) );
+    if ( $title ) printf( '<meta property="og:title" content="%s">' . "\n", $title );
+    if ( $desc  ) printf( '<meta property="og:description" content="%s">' . "\n", $desc );
+    printf( '<meta property="og:url" content="%s">' . "\n", esc_url( home_url( '/' ) ) );
+}
