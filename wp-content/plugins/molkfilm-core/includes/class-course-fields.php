@@ -20,7 +20,7 @@ class MolkFilm_Course_Fields {
     const NONCE_ACTION = 'molkfilm_save_course_fields';
     const NONCE_FIELD  = 'molkfilm_course_fields_nonce';
 
-    // All custom meta keys
+    // All custom meta keys (course details + per-course SEO)
     const FIELDS = [
         '_mf_mode'                     => [ 'type' => 'select',  'label' => 'طريقة التدريس' ],
         '_mf_total_seats'              => [ 'type' => 'number',  'label' => 'إجمالي المقاعد' ],
@@ -33,6 +33,10 @@ class MolkFilm_Course_Fields {
         '_mf_location'                 => [ 'type' => 'text',    'label' => 'الموقع (وجاهي)' ],
         '_mf_online_link'              => [ 'type' => 'url',     'label' => 'رابط الجلسة الأونلاين' ],
         '_mf_instructor_name'          => [ 'type' => 'text',    'label' => 'اسم المدرب' ],
+        // Per-course SEO overrides (used by class-seo.php)
+        '_mf_seo_title'                => [ 'type' => 'text',    'label' => 'عنوان SEO (اختياري)' ],
+        '_mf_seo_description'          => [ 'type' => 'text',    'label' => 'وصف SEO (اختياري)' ],
+        '_mf_seo_locale'               => [ 'type' => 'text',    'label' => 'اللغة (og:locale)' ],
     ];
 
     public static function init() {
@@ -161,6 +165,29 @@ class MolkFilm_Course_Fields {
                 <label for="mf_online_link"><?php esc_html_e( 'رابط الجلسة الأونلاين', 'molkfilm' ); ?></label>
                 <input type="url" id="mf_online_link" name="_mf_online_link"
                        value="<?php echo esc_attr( $values['_mf_online_link'] ); ?>" />
+            </div>
+
+            <div class="mf-section-head"><?php esc_html_e( 'تحسين محركات البحث (SEO)', 'molkfilm' ); ?></div>
+
+            <div class="full">
+                <label for="mf_seo_title"><?php esc_html_e( 'عنوان SEO (يُستبدل به العنوان الافتراضي)', 'molkfilm' ); ?></label>
+                <input type="text" id="mf_seo_title" name="_mf_seo_title"
+                       placeholder="<?php esc_attr_e( 'اتركه فارغاً لاستخدام عنوان الدورة', 'molkfilm' ); ?>"
+                       value="<?php echo esc_attr( $values['_mf_seo_title'] ?? '' ); ?>" />
+            </div>
+
+            <div class="full">
+                <label for="mf_seo_description"><?php esc_html_e( 'وصف SEO (meta description)', 'molkfilm' ); ?></label>
+                <input type="text" id="mf_seo_description" name="_mf_seo_description"
+                       placeholder="<?php esc_attr_e( 'اتركه فارغاً لاستخدام المقتطف', 'molkfilm' ); ?>"
+                       value="<?php echo esc_attr( $values['_mf_seo_description'] ?? '' ); ?>" />
+            </div>
+
+            <div>
+                <label for="mf_seo_locale"><?php esc_html_e( 'اللغة (og:locale)', 'molkfilm' ); ?></label>
+                <input type="text" id="mf_seo_locale" name="_mf_seo_locale"
+                       placeholder="ar_EG"
+                       value="<?php echo esc_attr( $values['_mf_seo_locale'] ?? 'ar_EG' ); ?>" />
             </div>
 
         </div><!-- .mf-meta-grid -->

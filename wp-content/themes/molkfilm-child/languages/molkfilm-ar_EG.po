@@ -1,0 +1,144 @@
+# Arabic (Egypt) translation for Molk Film Child Theme and Core Plugin.
+# Copyright (C) 2024 Molk Film
+# Translator: Molk Film Team <info@molkfilm.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Molk Film 1.0.0\n"
+"PO-Revision-Date: 2024-01-01 00:00+0200\n"
+"Last-Translator: Molk Film Team <info@molkfilm.com>\n"
+"Language-Team: Arabic (Egypt)\n"
+"Language: ar_EG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.x\n"
+
+msgid "ملك فيلم"
+msgstr "ملك فيلم"
+
+msgid "الدورات"
+msgstr "الدورات"
+
+msgid "سجّل الآن"
+msgstr "سجّل الآن"
+
+msgid "المقاعد ممتلئة"
+msgstr "المقاعد ممتلئة"
+
+msgid "عذراً، لقد امتلأت مقاعد هذه الدورة."
+msgstr "عذراً، لقد امتلأت مقاعد هذه الدورة."
+
+msgid "أونلاين"
+msgstr "أونلاين"
+
+msgid "وجاهي"
+msgstr "وجاهي"
+
+msgid "هجين"
+msgstr "هجين"
+
+#, php-format
+msgid "%d جلسة"
+msgstr "%d جلسة"
+
+msgid "تغيير اللغة"
+msgstr "Change Language"
+
+msgid "الرئيسية"
+msgstr "الرئيسية"
+
+msgid "عن الأكاديمية"
+msgstr "عن الأكاديمية"
+
+msgid "تواصل معنا"
+msgstr "تواصل معنا"
+
+msgid "حسابي"
+msgstr "حسابي"
+
+msgid "لوحة المتعلم"
+msgstr "لوحة المتعلم"
+
+msgid "اكتشف فن صناعة الأفلام"
+msgstr "اكتشف فن صناعة الأفلام"
+
+msgid "دورات احترافية في صناعة الأفلام مع خبراء الصناعة"
+msgstr "دورات احترافية في صناعة الأفلام مع خبراء الصناعة"
+
+msgid "استعرض الدورات"
+msgstr "استعرض الدورات"
+
+msgid "كيف يعمل؟"
+msgstr "كيف يعمل؟"
+
+msgid "أكاديمية ملك فيلم"
+msgstr "أكاديمية ملك فيلم"
+
+msgid "دورة احترافية"
+msgstr "دورة احترافية"
+
+msgid "طالب مسجّل"
+msgstr "طالب مسجّل"
+
+msgid "ساعة محتوى لكل دورة"
+msgstr "ساعة محتوى لكل دورة"
+
+msgid "محتوى تطبيقي عملي"
+msgstr "محتوى تطبيقي عملي"
+
+msgid "دوراتنا المميزة"
+msgstr "دوراتنا المميزة"
+
+msgid "عرض كل الدورات"
+msgstr "عرض كل الدورات"
+
+msgid "قريباً — ترقبوا دوراتنا القادمة!"
+msgstr "قريباً — ترقبوا دوراتنا القادمة!"
+
+msgid "كيف تبدأ رحلتك؟"
+msgstr "كيف تبدأ رحلتك؟"
+
+msgid "أربع خطوات بسيطة تفصلك عن احتراف صناعة الأفلام"
+msgstr "أربع خطوات بسيطة تفصلك عن احتراف صناعة الأفلام"
+
+msgid "هل أنت مستعد لبدء رحلتك السينمائية؟"
+msgstr "هل أنت مستعد لبدء رحلتك السينمائية؟"
+
+msgid "انضم الآن إلى مئات الطلاب الذين يحتلّون الشاشات الكبرى."
+msgstr "انضم الآن إلى مئات الطلاب الذين يحتلّون الشاشات الكبرى."
+
+msgid "استكشف حسب التخصص"
+msgstr "استكشف حسب التخصص"
+
+#, php-format
+msgid "%d دورة"
+msgstr "%d دورة"
+
+msgid "بوابة Paymob غير مُهيّأة. تواصل مع الدعم."
+msgstr "بوابة Paymob غير مُهيّأة. تواصل مع الدعم."
+
+msgid "بوابة PayTabs غير مُهيّأة. تواصل مع الدعم."
+msgstr "بوابة PayTabs غير مُهيّأة. تواصل مع الدعم."
+
+msgid "خطأ في معالجة الدفع: "
+msgstr "خطأ في معالجة الدفع: "
+
+msgid "في انتظار دفع Paymob"
+msgstr "في انتظار دفع Paymob"
+
+msgid "في انتظار دفع PayTabs"
+msgstr "في انتظار دفع PayTabs"
+
+msgid "بدأ البرنامج"
+msgstr "بدأ البرنامج"
+
+msgid "تم حفظ الإعدادات بنجاح."
+msgstr "تم حفظ الإعدادات بنجاح."
+
+msgid "جميع الحقوق محفوظة"
+msgstr "جميع الحقوق محفوظة"
+
+msgid "تلقّيت هذا البريد لأنك سجّلت في ملك فيلم. إذا كان هذا خطأً يرجى التواصل معنا."
+msgstr "تلقّيت هذا البريد لأنك سجّلت في ملك فيلم. إذا كان هذا خطأً يرجى التواصل معنا."

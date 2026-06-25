@@ -61,7 +61,9 @@ function molkfilm_init() {
 register_activation_hook( __FILE__, 'molkfilm_activate' );
 function molkfilm_activate() {
     require_once MOLKFILM_PLUGIN_DIR . 'includes/class-setup.php';
+    require_once MOLKFILM_PLUGIN_DIR . 'includes/class-payments.php'; // needed for molkfilm_after_setup
     MolkFilm_Setup::run();
+    do_action( 'molkfilm_after_setup' ); // lets class-payments.php wire PayPal options
     flush_rewrite_rules();
 }
 

@@ -194,13 +194,43 @@ add_filter( 'astra_get_css_prefix', '__return_empty_string' );
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
-/* ── WooCommerce: remove default styles, use ours ── */
-add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+/* ── WooCommerce: re-enqueue core WC styles (remove only theme CSS) ─────── */
+// Keep WC functional styles; brand.css overrides tokens on top
+add_filter( 'woocommerce_enqueue_styles', function( $styles ) {
+    // Remove WC's layout/theme CSS; keep the base (handles form inputs etc.)
+    unset( $styles['woocommerce-layout'] );
+    unset( $styles['woocommerce-smallscreen'] );
+    return $styles;
+} );
+
+/* ── Template loader: point 'courses' CPT to our /templates/ folder ─────── */
+add_filter( 'template_include', 'molkfilm_template_loader', 99 );
+function molkfilm_template_loader( $template ) {
+    if ( is_singular( 'courses' ) ) {
+        $custom = MOLKFILM_THEME_DIR . '/templates/single-courses.php';
+        if ( file_exists( $custom ) ) return $custom;
+    }
+    if ( is_post_type_archive( 'courses' ) || is_tax( 'course-category' ) ) {
+        $custom = MOLKFILM_THEME_DIR . '/templates/archive-courses.php';
+        if ( file_exists( $custom ) ) return $custom;
+    }
+    return $template;
+}
+
+/* ── Tutor LMS: override Tutor's own templates via its filter ────────────── */
+add_filter( 'tutor_get_template_path', 'molkfilm_tutor_template_path', 10, 2 );
+function molkfilm_tutor_template_path( $template, $name ) {
+    $custom = MOLKFILM_THEME_DIR . '/tutor/' . $name . '.php';
+    if ( file_exists( $custom ) ) {
+        return $custom;
+    }
+    return $template;
+}
 
 /* ── Tutor LMS: load after WC ────────────────────── */
 add_action( 'wp_enqueue_scripts', 'molkfilm_load_tutor_compat', 20 );
 function molkfilm_load_tutor_compat() {
-    // Ensure Tutor's own styles load; we override colour tokens only
+    // Ensure Tutor's own styles load; brand.css overrides colour tokens on top
 }
 
 /* ── Custom excerpt length ───────────────────────── */
